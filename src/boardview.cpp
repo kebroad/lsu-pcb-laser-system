@@ -1,6 +1,6 @@
 #include "boardview.h"
 
-BoardView::BoardView(QObject *parent) : QObject(parent)
+BoardView::BoardView(QObject *parent) : QGraphicsView(parent)
 {
 
 }
