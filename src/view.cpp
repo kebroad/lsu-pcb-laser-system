@@ -62,6 +62,6 @@ void View::gotUpdates()
 
 void View::addBoard(QPixmap p)
 {
-    scene.addItem(new Board(QPoint(0,0), p));
+    scene.addItem(new board_1(QPoint(0,0), p));
 
 }

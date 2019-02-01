@@ -66,7 +66,8 @@ SOURCES += main.cpp\
     widgets/glwidget.cpp \
     frmnew_or_load.cpp \
     prejob.cpp \
-    view.cpp
+    view.cpp \
+    board.cpp
 
 HEADERS  += frmmain.h \
     frmsettings.h \

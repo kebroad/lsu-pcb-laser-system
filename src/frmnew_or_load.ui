@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="images.qrc">
+   <iconset>
     <normaloff>:/images/LSU_PCB_ICON.png</normaloff>:/images/LSU_PCB_ICON.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -954,8 +954,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

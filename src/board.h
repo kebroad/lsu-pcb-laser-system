@@ -10,21 +10,64 @@
 
 
 
-class Board : public NotifyingItem<QGraphicsPixmapItem>
+class board_1 : public QGraphicsPixmapItem
 {
-  // QBrush m_brush;
 public:
-   Board(const QPointF & c, QPixmap p)  {
-      //const qreal r = 10.0 + (50.0*qrand())/RAND_MAX;
-      //setRect({-r, -r, 2.0*r, 2.0*r});
-      setPos(c);
-      setPixmap(p);
+   board_1()  {
+      setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
-
    }
+   void setBoardTop(QPixmap p);
 };
 
 
+class board_2 : public QGraphicsPixmapItem
+{
+public:
+   board_2()  {
+      setPos(QPointF(0,0));
+      setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+               QGraphicsItem::ItemSendsGeometryChanges);
+   }
+   void setBoardTop(QPixmap p);
+   void setBoardSolTop(QPixmap p);
+   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+private:
+   QGraphicsPixmapItem sol_top;
+};
 
+class board_3 : public QGraphicsPixmapItem
+{
+public:
+   board_3()  {
+      setPos(QPointF(0,0));
+      setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+               QGraphicsItem::ItemSendsGeometryChanges);
+   }
+   void setBoardTop(QPixmap p);
+   void setBoardBot(QPixmap p);
+   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+private:
+   QGraphicsPixmapItem bot;
+};
+
+class board_4 : public QGraphicsPixmapItem
+{
+public:
+   board_4()  {
+      setPos(QPointF(0,0));
+      setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+               QGraphicsItem::ItemSendsGeometryChanges);
+   }
+   void setBoardTop(QPixmap p);
+   void setBoardBot(QPixmap p);
+   void setBoardSolTop(QPixmap p);
+   void setBoardSolBot(QPixmap p);
+   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+private:
+   QGraphicsPixmapItem bot;
+   QGraphicsPixmapItem sol_top;
+   QGraphicsPixmapItem sol_bot;
+};
 #endif // BOARD_H
