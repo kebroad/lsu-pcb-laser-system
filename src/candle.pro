@@ -67,7 +67,8 @@ SOURCES += main.cpp\
     frmnew_or_load.cpp \
     prejob.cpp \
     view.cpp \
-    board.cpp
+    board.cpp \
+    boardview.cpp
 
 HEADERS  += frmmain.h \
     frmsettings.h \
@@ -101,7 +102,8 @@ HEADERS  += frmmain.h \
     prejob.h \
     view.h \
     board.h \
-    notifier.h
+    notifier.h \
+    boardview.h
 
 FORMS    += frmmain.ui \
     frmsettings.ui \

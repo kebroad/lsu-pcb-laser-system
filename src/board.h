@@ -10,10 +10,10 @@
 
 
 
-class board_1 : public QGraphicsPixmapItem
+class Board1 : public QGraphicsPixmapItem
 {
 public:
-   board_1()  {
+   Board1()  {
       setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
@@ -22,10 +22,10 @@ public:
 };
 
 
-class board_2 : public QGraphicsPixmapItem
+class Board2 : public QGraphicsPixmapItem
 {
 public:
-   board_2()  {
+   Board2()  {
       setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
@@ -37,10 +37,10 @@ private:
    QGraphicsPixmapItem sol_top;
 };
 
-class board_3 : public QGraphicsPixmapItem
+class Board3 : public QGraphicsPixmapItem
 {
 public:
-   board_3()  {
+   Board3()  {
       setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
@@ -52,10 +52,10 @@ private:
    QGraphicsPixmapItem bot;
 };
 
-class board_4 : public QGraphicsPixmapItem
+class Board4 : public QGraphicsPixmapItem
 {
 public:
-   board_4()  {
+   Board4()  {
       setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
