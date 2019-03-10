@@ -16,7 +16,10 @@
 #include "parser/gcodeviewparse.h"
 
 #include "frmmain.h"
-#include "frmnew_or_load.h"
+#include "general/job.h"
+
+#include "boardlayout/boardlayoutwidget.h"
+#include "dialogs/boardsize.h"
 
 
 int main(int argc, char *argv[])
@@ -92,6 +95,13 @@ int main(int argc, char *argv[])
 
     a.setStyleSheet(a.styleSheet() + "QWidget {font-size: 8pt}");
     int testing_cross;
+    Job * j = new Job;
+    BoardSize s(NULL, j);
+    s.exec();
+
+    BoardLayoutWidget l(NULL, j);
+    l.exec();
+    
     frmMain w;
     w.show();
    // frmNew_Or_Load l;

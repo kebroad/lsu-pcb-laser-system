@@ -64,11 +64,13 @@ SOURCES += main.cpp\
     widgets/styledtoolbutton.cpp \
     widgets/widget.cpp \
     widgets/glwidget.cpp \
-    frmnew_or_load.cpp \
-    prejob.cpp \
-    view.cpp \
-    board.cpp \
-    boardview.cpp
+    boardlayout/boardview.cpp \
+    boardlayout/boardlayoutwidget.cpp \
+    boardlayout/boardselector.cpp \
+    boardlayout/board.cpp \
+    general/job.cpp \
+    general/raster.cpp \
+    dialogs/boardsize.cpp
 
 HEADERS  += frmmain.h \
     frmsettings.h \
@@ -98,17 +100,17 @@ HEADERS  += frmmain.h \
     widgets/widget.h \
     widgets/glwidget.h \
     drawers/selectiondrawer.h \
-    frmnew_or_load.h \
-    prejob.h \
-    view.h \
-    board.h \
-    notifier.h \
-    boardview.h
+    boardlayout/boardview.h \
+    boardlayout/boardlayoutwidget.h \
+    boardlayout/boardselector.h \
+    boardlayout/board.h \
+    general/job.h \
+    general/raster.h \
+    dialogs/boardsize.h
 
 FORMS    += frmmain.ui \
     frmsettings.ui \
-    frmabout.ui \
-    frmnew_or_load.ui
+    frmabout.ui
 
 DEFINES += _USE_MATH_DEFINES
 

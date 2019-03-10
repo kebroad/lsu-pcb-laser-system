@@ -100,8 +100,7 @@ frmMain::frmMain(QWidget *parent) :
     foreach (StyledToolButton* button, this->findChildren<StyledToolButton*>(QRegExp("cmdUser\\d"))) {
         connect(button, SIGNAL(clicked(bool)), this, SLOT(onCmdUserClicked(bool)));
     }
-    frmnew_or_load = new frmNew_Or_Load(this);
-    frmnew_or_load->show();
+
     m_originDrawer = new OriginDrawer();
     m_codeDrawer = new GcodeDrawer();
     m_codeDrawer->setViewParser(&m_viewParser);

@@ -4,7 +4,6 @@
 #ifndef FRMMAIN_H
 #define FRMMAIN_H
 
-#include "frmnew_or_load.h"
 
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
@@ -245,7 +244,6 @@ private:
     QStringList m_statusForeColors;
 
 
-    frmNew_Or_Load *frmnew_or_load;
 
 #ifdef WINDOWS
     QWinTaskbarButton *m_taskBarButton;

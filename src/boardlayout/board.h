@@ -2,12 +2,8 @@
 #define BOARD_H
 
 
-
-
-
-#include "notifier.h"
-//#include "view.h"
-
+#include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
 
 class Board1 : public QGraphicsPixmapItem
@@ -29,12 +25,14 @@ public:
       setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
+      sol_top = new QGraphicsPixmapItem;
    }
    void setBoardTop(QPixmap p);
    void setBoardSolTop(QPixmap p);
    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+   QGraphicsPixmapItem* sol_top;
 private:
-   QGraphicsPixmapItem sol_top;
+
 };
 
 class Board3 : public QGraphicsPixmapItem
@@ -44,12 +42,14 @@ public:
       setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
+      bot = new QGraphicsPixmapItem;
    }
    void setBoardTop(QPixmap p);
    void setBoardBot(QPixmap p);
    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+   QGraphicsPixmapItem* bot;
 private:
-   QGraphicsPixmapItem bot;
+
 };
 
 class Board4 : public QGraphicsPixmapItem
@@ -59,15 +59,20 @@ public:
       setPos(QPointF(0,0));
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
+      bot = new QGraphicsPixmapItem;
+      sol_top = new QGraphicsPixmapItem;
+      sol_bot = new QGraphicsPixmapItem;
    }
    void setBoardTop(QPixmap p);
    void setBoardBot(QPixmap p);
    void setBoardSolTop(QPixmap p);
    void setBoardSolBot(QPixmap p);
    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+
+   QGraphicsPixmapItem* bot;
+   QGraphicsPixmapItem* sol_top;
+   QGraphicsPixmapItem* sol_bot;
 private:
-   QGraphicsPixmapItem bot;
-   QGraphicsPixmapItem sol_top;
-   QGraphicsPixmapItem sol_bot;
+
 };
 #endif // BOARD_H
