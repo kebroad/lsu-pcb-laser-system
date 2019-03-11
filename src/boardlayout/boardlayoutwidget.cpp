@@ -6,8 +6,8 @@ BoardLayoutWidget::BoardLayoutWidget(QWidget *parent, Job * j) : QDialog(parent)
     showMaximized();
    // setWindowState(Qt::WindowMaximized);
     job = j;
-    job->height = 1500;
-    job->width = 1000;
+    //job->height = 1500;
+    //job->width = 1000;
     main_layout = new QHBoxLayout(this);
     button_layout = new QVBoxLayout;
 
