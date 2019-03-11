@@ -70,7 +70,9 @@ SOURCES += main.cpp\
     boardlayout/board.cpp \
     general/job.cpp \
     general/raster.cpp \
-    dialogs/boardsize.cpp
+    dialogs/boardsize.cpp \
+    startingwidget.cpp \
+    dialogs/boardtype.cpp
 
 HEADERS  += frmmain.h \
     frmsettings.h \
@@ -106,7 +108,9 @@ HEADERS  += frmmain.h \
     boardlayout/board.h \
     general/job.h \
     general/raster.h \
-    dialogs/boardsize.h
+    dialogs/boardsize.h \
+    startingwidget.h \
+    dialogs/boardtype.h
 
 FORMS    += frmmain.ui \
     frmsettings.ui \

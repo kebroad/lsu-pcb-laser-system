@@ -20,7 +20,6 @@ class BoardSize : public QDialog
     Q_OBJECT
 public:
     explicit BoardSize(QWidget *parent = nullptr, Job * j = new Job);
-    int option;
     Job * job;
     QVBoxLayout * main_layout;
     QHBoxLayout * custom;
@@ -40,22 +39,6 @@ public:
 signals:
 
 public slots:
-    void setopt(int opt){
-        switch (opt){
-        case 1:
-            option = 1;
-            break;
-        case 2:
-            option = 2;
-            break;
-        case 3:
-            option = 3;
-            break;
-        case 4:
-            option = 4;
-            break;
-        }
-    }
     void accept(){
         if(this->sizeopt1->isChecked()){
 
