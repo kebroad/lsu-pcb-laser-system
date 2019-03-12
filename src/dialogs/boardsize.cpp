@@ -1,6 +1,6 @@
 #include "boardsize.h"
 
-BoardSize::BoardSize(QWidget *parent, Job * j) : QDialog(parent)
+BoardSize::BoardSize(QWidget *parent, Job * j) : QWidget(parent)
 {
     job = j;
     main_layout = new QVBoxLayout(this);
@@ -28,13 +28,5 @@ BoardSize::BoardSize(QWidget *parent, Job * j) : QDialog(parent)
 
     main_layout->addLayout(custom);
 
-    connect(sizeopt1, SIGNAL(isChecked()), this, SLOT(setopt(1)));
-    connect(sizeopt2, SIGNAL(isChecked()), this, SLOT(setopt(2)));
-    connect(sizeopt3, SIGNAL(isChecked()), this, SLOT(setopt(3)));
-    connect(sizecust, SIGNAL(isChecked()), this, SLOT(setopt(4)));
 
-    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    main_layout->addWidget(buttonBox);
 }

@@ -12,7 +12,7 @@ bool Job::isSame(Job j){
 }
 
 void Job::graphInit(){
-    assert(width !=0 && height != 0);
+   // assert(width !=0 && height != 0);
     border_width = border_width + 200;
     border_height = border_height + 200;
     origin.setX(border_width/2);

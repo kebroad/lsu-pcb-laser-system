@@ -61,9 +61,7 @@ BoardLayoutWidget::BoardLayoutWidget(QWidget *parent, Job * j) : QDialog(parent)
     }
     main_layout->addLayout(button_layout);
 
-    ok = new QPushButton("ok");
-    add_remove->addWidget(ok);
-    QObject::connect(ok, SIGNAL(clicked()), this, SLOT(publishBoard()));
+
 
 
 

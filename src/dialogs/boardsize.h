@@ -15,7 +15,7 @@
 
 #include "general/job.h"
 
-class BoardSize : public QDialog
+class BoardSize : public QWidget
 {
     Q_OBJECT
 public:
@@ -35,7 +35,6 @@ public:
     QLabel * heightu;
     QLabel * widthu;
 
-    QDialogButtonBox * buttonBox;
 signals:
 
 public slots:

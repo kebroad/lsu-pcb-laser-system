@@ -18,8 +18,7 @@
 #include "frmmain.h"
 #include "general/job.h"
 
-#include "boardlayout/boardlayoutwidget.h"
-#include "dialogs/boardsize.h"
+#include <startingwidget.h>
 
 
 int main(int argc, char *argv[])
@@ -96,12 +95,9 @@ int main(int argc, char *argv[])
     a.setStyleSheet(a.styleSheet() + "QWidget {font-size: 8pt}");
     int testing_cross;
     Job * j = new Job;
-    BoardSize s(NULL, j);
-    s.exec();
+    StartingWidget sw(NULL, j);
+    sw.exec();
 
-    BoardLayoutWidget l(NULL, j);
-    l.exec();
-    
     frmMain w;
     w.show();
    // frmNew_Or_Load l;

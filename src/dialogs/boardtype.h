@@ -11,12 +11,11 @@
 #include <QWidget>
 #include "general/job.h"
 
-class BoardType : public QDialog
+class BoardType : public QWidget
 {
     Q_OBJECT
 public:
-    explicit BoardType(QWidget *parent = nullptr, Job * j = new Job);
-    Job* job;
+    explicit BoardType(QWidget *parent = nullptr);
     QVBoxLayout * main_layout;
     QLabel * logo;
     QLabel * description;
@@ -26,7 +25,6 @@ public:
     QRadioButton* top_bot;
     QRadioButton* top_bot_sol;
 
-    QDialogButtonBox * buttonBox;
 signals:
 
 public slots:
