@@ -3,11 +3,12 @@
 
 BoardLayoutWidget::BoardLayoutWidget(QWidget *parent, Job * j) : QDialog(parent)
 {
-    showMaximized();
+
+  //  showMaximized();
    // setWindowState(Qt::WindowMaximized);
     job = j;
-    //job->height = 1500;
-    //job->width = 1000;
+
+
     main_layout = new QHBoxLayout(this);
     button_layout = new QVBoxLayout;
 
@@ -33,6 +34,7 @@ BoardLayoutWidget::BoardLayoutWidget(QWidget *parent, Job * j) : QDialog(parent)
             button_layout->addWidget(board1.at(0));
             board1.at(0)->show();
             board_view1->addBoard(board1.at(0)->board);
+            setMinimumSize(board_view1->top_view->width() + 500, board_view1->top_view->height() + 100);
             break;
         case TOP_SOL:
             board_view2 = new BoardView2(job);

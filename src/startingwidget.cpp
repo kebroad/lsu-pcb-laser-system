@@ -1,9 +1,23 @@
 #include "startingwidget.h"
-
+#include <QApplication>
+#include <QDesktopServices>
+#include <QScreen>
 StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 {
-    setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
-    showMaximized();
+
+
+
+    Qt::WindowFlags flags = 0;
+
+    flags |= Qt::WindowMinMaxButtonsHint;
+
+
+    flags |= Qt::WindowCloseButtonHint;
+    setWindowFlags( flags );
+
+   setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
+   // this->adjustSize();
+    //showMaximized();
     job = j;
     w = new QStackedWidget;
 
