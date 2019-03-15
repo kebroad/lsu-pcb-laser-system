@@ -61,19 +61,25 @@ public slots:
             case 1:
                 if(this->s->sizeopt1->isChecked()){
                         w->setCurrentIndex(2);
+                        this->job->graphInit();
                 }
                 else if(this->s->sizeopt2->isChecked()){
                         w->setCurrentIndex(2);
+                        this->job->graphInit();
                 }
                 else if(this->s->sizeopt3->isChecked()){
                         w->setCurrentIndex(2);
+                        this->job->graphInit();
                 }
                 else if(this->s->sizecust->isChecked()){
                     job->height =  this->s->height->text().toInt();
                     job->width =  this->s->width->text().toInt();
+                    this->job->graphInit();
                     this->l = new BoardLayoutWidget(NULL, this->job);
+
                     w->insertWidget(2,l);
                     w->setCurrentIndex(2);
+
                 }
                 else{
                     QMessageBox::warning(this, "Warning", "Please Select a board size before continuing!");
