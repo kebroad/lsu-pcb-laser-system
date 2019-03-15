@@ -10,21 +10,14 @@ bool Job::isSame(Job j){
         return true;
     return false;
 }
-/*
-void Job::setOrigin(){
-    origin.setX(border_width/2);
-    origin.setY(border_height/2);
-
-}
-*/
 
 void Job::graphInit(){
    // assert(width !=0 && height != 0);
-    border_width = width + 200;
-    border_height = height + 200;
-    origin.setX(border_width/2);
-    origin.setY(border_height/2);
-    border = new QRectF(origin.x(), origin.y(), width, height);
+    border_width = width + d_x;
+    border_height = height + d_y;
+    origin.setX(width/2);
+    origin.setY(height/2);
+    border = new QRectF(origin.x()+(d_x/2), origin.y()+(d_y/2), width, height);
 }
 
 

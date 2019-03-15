@@ -13,9 +13,11 @@ public:
     explicit Job();
     bool isSame(Job j);
     void graphInit();
-    void createRoutes();
-    double width = 0;
-    double height = 0;
+    int width = 0;
+    int height = 0;
+    int d_x = 200;
+    int d_y = 200;
+
     QRectF* border;
     double border_width = 0;
     double border_height = 0;

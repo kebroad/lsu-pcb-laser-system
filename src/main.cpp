@@ -93,13 +93,18 @@ int main(int argc, char *argv[])
 #endif
 
     a.setStyleSheet(a.styleSheet() + "QWidget {font-size: 8pt}");
+    frmMain w;
+
+    w.hide();
     int testing_cross;
     Job * j = new Job;
     StartingWidget sw(NULL, j);
-    sw.exec();
+    int isacc = sw.exec();
+    int test = 1;
+    if(isacc == QDialog::Accepted){
+        w.show();
+    }
 
-    frmMain w;
-    w.show();
    // frmNew_Or_Load l;
    // l.exec();
 

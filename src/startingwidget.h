@@ -91,7 +91,7 @@ public slots:
                                             QMessageBox::Yes|QMessageBox::No);
                 if (reply == QMessageBox::Yes) {
                     this->l->publishBoard();
-                    this->accept();
+                    accept();
                 }
 
 
