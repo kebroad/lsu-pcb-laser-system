@@ -27,7 +27,7 @@ contains(QT_CONFIG, opengles.) {
     target.path = /home/pi
 }
 
-TARGET = Candle
+TARGET = "LSU PCB Laser System"
 TEMPLATE = app
 VERSION = 1.0.12
 RC_ICONS += images/candle.ico
