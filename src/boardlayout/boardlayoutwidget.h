@@ -49,25 +49,25 @@ public slots:
         job->board_amount++;
         switch (job->job_type) {
         case TOP:
-            board1.append(new BoardSelector1(job->board_amount));
+            board1.append(new BoardSelector1(job->board_amount, job->origin));
             button_layout->addWidget(board1.last());
             board1.last()->show();
             board_view1->addBoard(board1.last()->board);
             break;
         case TOP_SOL:
-            board2.append(new BoardSelector2);
+            board2.append(new BoardSelector2(job->board_amount, job->origin));
             button_layout->addWidget(board2.last());
             board2.last()->show();
             board_view2->addBoard(board2.last()->board);
             break;
         case TOP_BOT:
-            board3.append(new BoardSelector3);
+            board3.append(new BoardSelector3(job->board_amount, job->origin));
             button_layout->addWidget(board3.last());
             board3.last()->show();
             board_view3->addBoard(board3.last()->board);
             break;
         case TOP_BOT_SOL:
-            board4.append(new BoardSelector4);
+            board4.append(new BoardSelector4(job->board_amount, job->origin));
             button_layout->addWidget(board4.last());
             board4.last()->show();
             board_view4->addBoard(board4.last()->board);
@@ -105,8 +105,9 @@ public slots:
     void publishBoard(){
         switch(job->job_type){
             case TOP:
-                job->top = new QImage(board_view1->publishLayout());
+         {       job->top = new QImage(board_view1->publishLayout());
                 break;
+        }
             case TOP_SOL:
                 job->top = new QImage(board_view2->publishLayoutTop());
                 job->sol_top = new QImage(board_view2->publishLayoutSolTop());

@@ -17,7 +17,7 @@ class BoardSelector1 : public QWidget
     Q_OBJECT
 public:
     Board1 * board;
-    explicit BoardSelector1( int number = 0, QWidget *parent = nullptr);
+    explicit BoardSelector1( int number = 0 , QPoint o = QPoint(0,0), QWidget *parent = nullptr);
     ~BoardSelector1();
     QVBoxLayout * layout;
     QGroupBox * top_box;
@@ -51,7 +51,7 @@ class BoardSelector2 : public QWidget
     Q_OBJECT
 public:
     Board2 * board;
-    explicit BoardSelector2(int number = 1, QWidget *parent = nullptr);
+    explicit BoardSelector2(int number = 1,  QPoint o = QPoint(0,0), QWidget *parent = nullptr);
     //~BoardSelector2();
     QGroupBox* main;
     QHBoxLayout * main_layout;
@@ -110,7 +110,7 @@ class BoardSelector3 : public QWidget
     Q_OBJECT
 public:
     Board3 * board;
-    explicit BoardSelector3(int number = 1, QWidget *parent = nullptr);
+    explicit BoardSelector3(int number = 1,  QPoint o = QPoint(0,0), QWidget *parent = nullptr);
     //~BoardSelector3();
     QGroupBox* main;
     QHBoxLayout * main_layout;
@@ -169,7 +169,7 @@ class BoardSelector4 : public QWidget
     Q_OBJECT
 public:
     Board4 * board;
-    explicit BoardSelector4(int number = 1, QWidget *parent = nullptr);
+    explicit BoardSelector4(int number = 1, QPoint o = QPoint(0,0), QWidget *parent = nullptr);
     //~BoardSelector4();
 
     QGroupBox * main;

@@ -9,8 +9,8 @@
 class Board1 : public QGraphicsPixmapItem
 {
 public:
-   Board1()  {
-      setPos(QPointF(0,0));
+   Board1(QPoint o)  {
+      setPos(o);
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
    }
@@ -21,8 +21,8 @@ public:
 class Board2 : public QGraphicsPixmapItem
 {
 public:
-   Board2()  {
-      setPos(QPointF(0,0));
+   Board2(QPoint o)  {
+      setPos(o);
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
       sol_top = new QGraphicsPixmapItem;
@@ -38,8 +38,8 @@ private:
 class Board3 : public QGraphicsPixmapItem
 {
 public:
-   Board3()  {
-      setPos(QPointF(0,0));
+   Board3(QPoint o)  {
+      setPos(o);
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
       bot = new QGraphicsPixmapItem;
@@ -55,8 +55,8 @@ private:
 class Board4 : public QGraphicsPixmapItem
 {
 public:
-   Board4()  {
-      setPos(QPointF(0,0));
+   Board4(QPoint o)  {
+      setPos(o);
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
       bot = new QGraphicsPixmapItem;

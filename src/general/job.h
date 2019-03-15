@@ -21,7 +21,7 @@ public:
     QRectF* border;
     double border_width = 0;
     double border_height = 0;
-    QPointF origin;
+    QPoint origin;
     JobType job_type = TOP_BOT;
     int board_amount;
    

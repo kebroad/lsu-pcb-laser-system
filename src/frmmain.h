@@ -37,6 +37,9 @@
 
 #include "widgets/styledtoolbutton.h"
 
+#include "general/job.h"
+#include "general/layerselection.h"
+
 #include "frmsettings.h"
 #include "frmabout.h"
 
@@ -81,12 +84,24 @@ class frmMain : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit frmMain(QWidget *parent = 0);
+    explicit frmMain(QWidget *parent = 0, Job * j = new Job);
     ~frmMain();
-
+    Job * job;
     double toolZPosition();
     
 private slots:
+    void loadTop(){
+        loadFile(job->top_gcode);
+    }
+    void loadTopSol(){
+        loadFile(job->sol_top_gcode);
+    }
+    void loadBot(){
+        loadFile(job->bot_gcode);
+    }
+    void loadBotSol(){
+        loadFile(job->sol_bot_gcode);
+    }
     void updateHeightMapInterpolationDrawer(bool reset = false);
     void placeVisualizerButtons();
 
@@ -310,8 +325,8 @@ private:
 
     QStringList m_recentFiles;
     QStringList m_recentHeightmaps;
-
-    void loadFile(QString fileName);
+    void loadFile(QFile file);
+    void loadFile(QFile* file);
     void loadFile(QList<QString> data);
     void clearTable();
     void preloadSettings();

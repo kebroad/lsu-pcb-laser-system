@@ -1,7 +1,7 @@
 #include "raster.h"
 
 
-raster::raster(Job* j, double stp, LaserMode l_mode, int laser_intensity)
+Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity)
 {
     this->job = j;
     this->step_amt = stp;
@@ -9,18 +9,31 @@ raster::raster(Job* j, double stp, LaserMode l_mode, int laser_intensity)
     this->laser_intensity = laser_intensity;
 }
 
-double raster::step(int x){
+double Raster::step(int x){
     return this->step_amt * x;
 }
 
 
-bool raster::isWhite(QRgb o){
+bool Raster::isWhite(QRgb o){
     return (qRed(o) == 255) && (qBlue(o) == 255) && (qGreen(o) == 255);
 }
 
 
-QFile * raster::rasterRoute(QImage* image){
-    QFile * file = new QFile;
+QFile * Raster::rasterRoute(QImage* image, int jt){
+    QFile * file = new QFile("PWD/test.ngc");
+    switch(jt){
+    case 1:
+        break;
+    case 2:
+        //file->rename("top_sol.ngc");
+        break;
+    case 3:
+        //file->rename("bot.ngc");
+        break;
+    case 4:
+       // file->rename("bot_sol.ngc");
+        break;
+    }
     QTextStream fstream(file);
     bool laser_off_path = false;
     bool laser_on_path = false;

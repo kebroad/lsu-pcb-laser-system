@@ -17,6 +17,7 @@
 
 #include "frmmain.h"
 #include "general/job.h"
+#include "general/raster.h"
 
 #include <startingwidget.h>
 
@@ -93,16 +94,38 @@ int main(int argc, char *argv[])
 #endif
 
     a.setStyleSheet(a.styleSheet() + "QWidget {font-size: 8pt}");
-    frmMain w;
 
-    w.hide();
+
+
     int testing_cross;
     Job * j = new Job;
     StartingWidget sw(NULL, j);
     int isacc = sw.exec();
-    int test = 1;
+    Raster r(j, 0.1016, CONSTANT_LASER_POWER_MODE, 1000);
+    switch(j->job_type){
+    case TOP:
+        r.rasterRoute(j->top, 1);
+        break;
+    case TOP_SOL:
+        j->top_gcode = r.rasterRoute(j->top, 1);
+        j->sol_top_gcode = r.rasterRoute(j->sol_top, 2 );
+        break;
+    case TOP_BOT:
+        j->top_gcode = r.rasterRoute(j->top, 1);
+        j->bot_gcode = r.rasterRoute(j->bot, 3);
+        break;
+    case TOP_BOT_SOL:
+        j->top_gcode = r.rasterRoute(j->top, 1);
+        j->sol_top_gcode = r.rasterRoute(j->sol_top, 2);
+        j->bot_gcode = r.rasterRoute(j->bot, 3);
+        j->sol_bot_gcode = r.rasterRoute(j->sol_bot, 4);
+        break;
+    }
+    frmMain* w = new frmMain(NULL,j);
+        w->hide();
     if(isacc == QDialog::Accepted){
-        w.show();
+
+        w->show();
     }
 
    // frmNew_Or_Load l;

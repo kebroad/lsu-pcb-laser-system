@@ -8,7 +8,7 @@
 
 enum LaserMode {CONSTANT_LASER_POWER_MODE, DYNAMIC_LASER_POWER_MODE};
 
-class raster
+class Raster
 {
 public:
     LaserMode laser_mode;
@@ -16,9 +16,9 @@ public:
     double step_amt;
     int laser_intensity = 255;
 
-    raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity);
+    Raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity);
 
-    QFile * rasterRoute(QImage* image);
+    QFile*  rasterRoute(QImage* image, int jt = 1);
     bool isWhite(QRgb o);
     double step(int x);
 

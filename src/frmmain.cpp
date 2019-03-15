@@ -33,10 +33,11 @@
 #include "frmmain.h"
 #include "ui_frmmain.h"
 
-frmMain::frmMain(QWidget *parent) :
+frmMain::frmMain(QWidget *parent, Job * j) :
     QMainWindow(parent),
     ui(new Ui::frmMain)
 {
+    job = j;
     m_status << "Unknown" << "Idle" << "Alarm" << "Run" << "Home" << "Hold" << "Queue" << "Check" << "Door";
     m_statusCaptions << tr("Unknown") << tr("Idle") << tr("Alarm") << tr("Run") << tr("Home") << tr("Hold") << tr("Queue") << tr("Check") << tr("Door");
     m_statusBackColors << "red" << "palette(button)" << "red" << "lime" << "lime" << "yellow" << "yellow" << "palette(button)" << "red";
@@ -186,6 +187,14 @@ frmMain::frmMain(QWidget *parent) :
     ui->splitPanels->handle(1)->installEventFilter(this);
     ui->splitPanels->installEventFilter(this);
 
+
+    LayerSelection* ls = new LayerSelection(NULL, job);
+    ui->verticalLayout_2->addWidget(ls);
+    connect(ls->top, SIGNAL(clicked()), this, SLOT(loadTop()));
+    connect(ls->top_sol, SIGNAL(clicked()), this, SLOT(loadTopSol()));
+    connect(ls->bot, SIGNAL(clicked()), this, SLOT(loadBot()));
+    connect(ls->bot_sol, SIGNAL(clicked()), this, SLOT(loadBotSol()));
+
     connect(&m_timerConnection, SIGNAL(timeout()), this, SLOT(onTimerConnection()));
     connect(&m_timerStateQuery, SIGNAL(timeout()), this, SLOT(onTimerStateQuery()));
     m_timerConnection.start(1000);
@@ -195,6 +204,7 @@ frmMain::frmMain(QWidget *parent) :
     if (qApp->arguments().count() > 1 && isGCodeFile(qApp->arguments().last())) {
         loadFile(qApp->arguments().last());
     }
+
 
 }
 
@@ -1614,20 +1624,41 @@ void frmMain::loadFile(QList<QString> data)
     updateControlsState();
 }
 
-void frmMain::loadFile(QString fileName)
+void frmMain::loadFile(QFile file)
 {
-    QFile file(fileName);
 
     if (!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::critical(this, this->windowTitle(), tr("Can't open file:\n") + fileName);
+        QMessageBox::critical(this, this->windowTitle(), tr("Can't open file:\n") + file.fileName());
         return;
     }
 
     // Set filename
-    m_programFileName = fileName;
+    m_programFileName = file.fileName();
 
     // Prepare text stream
     QTextStream textStream(&file);
+
+    // Read lines
+    QList<QString> data;
+    while (!textStream.atEnd()) data.append(textStream.readLine());
+
+    // Load lines
+    loadFile(data);
+}
+
+void frmMain::loadFile(QFile* file)
+{
+
+    if (!file->open(QIODevice::ReadOnly)) {
+        QMessageBox::critical(this, this->windowTitle(), tr("Can't open file:\n") + file->fileName());
+        return;
+    }
+
+    // Set filename
+    m_programFileName = file->fileName();
+
+    // Prepare text stream
+    QTextStream textStream(file);
 
     // Read lines
     QList<QString> data;
