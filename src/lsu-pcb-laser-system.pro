@@ -30,7 +30,7 @@ contains(QT_CONFIG, opengles.) {
 TARGET = "LSU PCB Laser System"
 TEMPLATE = app
 VERSION = 1.0.12
-RC_ICONS += images/candle.ico
+RC_ICONS += images/LSU_PCB_ICON.ico
 
 DEFINES += sNan=\"65536\"
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"

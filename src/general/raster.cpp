@@ -20,20 +20,23 @@ bool Raster::isWhite(QRgb o){
 
 
 QFile * Raster::rasterRoute(QImage* image, int jt){
-    QFile * file = new QFile("PWD/test.ngc");
+    QFile * file = new QFile("top.ngc");
+
+
     switch(jt){
     case 1:
         break;
     case 2:
-        //file->rename("top_sol.ngc");
+        file->rename("top_sol.ngc");
         break;
     case 3:
-        //file->rename("bot.ngc");
+        file->rename("bot.ngc");
         break;
     case 4:
-       // file->rename("bot_sol.ngc");
+        file->rename("bot_sol.ngc");
         break;
     }
+    file->open(QIODevice::ReadWrite);
     QTextStream fstream(file);
     bool laser_off_path = false;
     bool laser_on_path = false;
