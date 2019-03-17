@@ -109,16 +109,22 @@ public slots:
                 break;
         }
             case TOP_SOL:
+        {
                 job->top = new QImage(board_view2->publishLayoutTop());
+                QFile file1("top.png");
+                file1.open(QIODevice::WriteOnly);
+                job->top->save(&file1, "PNG");
                 job->sol_top = new QImage(board_view2->publishLayoutSolTop());
+                QFile file("sol_top.png");
+                file.open(QIODevice::WriteOnly);
+                job->sol_top->save(&file, "PNG");
                 break;
+        }
             case TOP_BOT:
         {
                 job->top = new QImage(board_view3->publishLayoutTop());
                 job->bot = new QImage(board_view3->publishLayoutBot());
-                QFile file("yourFile.png");
-                file.open(QIODevice::WriteOnly);
-                job->bot->save(&file, "PNG");
+
                 break;
         }
             case TOP_BOT_SOL:

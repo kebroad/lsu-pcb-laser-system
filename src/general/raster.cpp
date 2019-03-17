@@ -36,8 +36,12 @@ QFile * Raster::rasterRoute(QImage* image, int jt){
         file->rename("bot_sol.ngc");
         break;
     }
-    file->open(QIODevice::ReadWrite);
-    QTextStream fstream(file);
+    //if(file->exists()){
+     //   file->reset()
+    //}
+    file->open(QIODevice::ReadWrite);//, QIODevice::Truncate)
+
+    QTextStream  fstream(file);
     bool laser_off_path = false;
     bool laser_on_path = false;
     fstream << "G90" << endl;
@@ -114,6 +118,10 @@ QFile * Raster::rasterRoute(QImage* image, int jt){
     }
     fstream << "M5" << endl;
     fstream << "G0 X0 Y0 Z0 S0" << endl;
+
+    file->close();
+ fstream.reset();
+    //   fstream.~QTextStream();
     return file;
 }
 

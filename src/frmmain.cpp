@@ -1648,11 +1648,13 @@ void frmMain::loadFile(QFile file)
 
 void frmMain::loadFile(QFile* file)
 {
-
+    /*
     if (!file->open(QIODevice::ReadOnly)) {
         QMessageBox::critical(this, this->windowTitle(), tr("Can't open file:\n") + file->fileName());
         return;
     }
+    */
+    file->open(QIODevice::ReadWrite);
 
     // Set filename
     m_programFileName = file->fileName();
