@@ -1,3 +1,4 @@
+
 // This file is a part of "Candle" application.
 // This file was originally ported from "PointSegment.java" class
 // of "Universal GcodeSender" application written by Will Winder

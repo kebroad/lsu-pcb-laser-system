@@ -140,7 +140,7 @@ QList<LineSegment*> GcodeViewParse::getLinesFromParser(GcodeParser *gp, double a
                         ls->setIsMetric(isMetric);
                         ls->setIsAbsolute(ps->isAbsolute());
                         ls->setSpeed(ps->getSpeed());
-                        ls->setSpindleSpeed(ps->getSpindleSpeed());
+                        ls->setSpeed(ps->getSpeed());
                         ls->setDwell(ps->getDwell());
                         this->testExtremes(nextPoint);
                         m_lines.append(ls);
@@ -158,7 +158,7 @@ QList<LineSegment*> GcodeViewParse::getLinesFromParser(GcodeParser *gp, double a
                 ls->setIsMetric(isMetric);
                 ls->setIsAbsolute(ps->isAbsolute());
                 ls->setSpeed(ps->getSpeed());
-                ls->setSpindleSpeed(ps->getSpindleSpeed());
+                ls->setSpeed(ps->getSpeed());
                 ls->setDwell(ps->getDwell());
                 this->testExtremes(*end);
                 this->testLength(*start, *end);
