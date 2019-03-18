@@ -20,20 +20,22 @@ bool Raster::isWhite(QRgb o){
 
 
 QFile * Raster::rasterRoute(QImage* image, int jt){
-    QFile * file = new QFile("top.ngc");
+    QFile * file;
 
 
     switch(jt){
     case 1:
-        break;
+
+        file = new QFile("top.ngc");
+               break;
     case 2:
-        file->rename("top_sol.ngc");
+        file = new QFile("top_sol.ngc");
         break;
     case 3:
-        file->rename("bot.ngc");
+        file = new QFile("bot.ngc");
         break;
     case 4:
-        file->rename("bot_sol.ngc");
+        file = new QFile("bot_sol.ngc");
         break;
     }
     //if(file->exists()){
