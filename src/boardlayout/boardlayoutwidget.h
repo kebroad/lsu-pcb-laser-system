@@ -141,6 +141,7 @@ public slots:
             file3.open(QIODevice::WriteOnly);
             job->bot->save(&file3, "PNG");
             job->sol_bot = new QImage(board_view4->publishLayoutSolBot());
+
             QFile file4("sol_bot.png");
             file4.open(QIODevice::WriteOnly);
             job->sol_bot->save(&file4, "PNG");

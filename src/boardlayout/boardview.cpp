@@ -86,6 +86,7 @@ QImage BoardView2::publishLayoutTop(){
     image.fill(Qt::white);
     QPainter painter(&image);
     top_scene->render(&painter);
+    painter.end();
     return image;
 }
 
@@ -97,6 +98,7 @@ QImage BoardView2::publishLayoutSolTop(){
     image.fill(Qt::white);
     QPainter painter(&image);
     sol_top_scene->render(&painter);
+    painter.end();
     return image;
 }
 /**********************************************************/
@@ -141,24 +143,27 @@ void BoardView3::removeBoard(Board3 *board){
 }
 
 QImage BoardView3::publishLayoutTop(){
-    this->top_view->setSceneRect(job->border->toRect());
+    this->top_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->top_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
-    QImage image(top_view->sceneRect().size().toSize(), QImage::Format_RGB32);
+    QImage image(top_scene->sceneRect().size().toSize(), QImage::Format_RGB32);
     image.fill(Qt::white);
     QPainter painter(&image);
     top_scene->render(&painter);
+    painter.end();
     return image;
 }
 
 QImage BoardView3::publishLayoutBot(){
-    this->bot_view->setSceneRect(job->border->toRect());
+    this->bot_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->bot_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
-    QImage image(bot_view->sceneRect().size().toSize(), QImage::Format_RGB32);
+    QImage image(bot_scene->sceneRect().size().toSize(), QImage::Format_RGB32);
     image.fill(Qt::white);
     QPainter painter(&image);
-    bot_view->render(&painter);
+    bot_scene->render(&painter);
+    painter.end();
+    image = image.mirrored(true,false);
     return image;
 }
 
@@ -208,6 +213,7 @@ BoardView4::BoardView4(Job * j, QWidget * parent) : QWidget(parent){
     sol_top_view->setScene(sol_top_scene);
     sol_bot_view->setScene(sol_bot_scene);
 
+
     bot_view->scale(-1,1);
     sol_bot_view->scale(-1,1);
 
@@ -232,24 +238,26 @@ void BoardView4::removeBoard(Board4 *board){
 }
 
 QImage BoardView4::publishLayoutTop(){
-    this->top_view->setSceneRect(job->border->toRect());
+    this->top_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->top_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
-    QImage image(top_view->sceneRect().size().toSize(), QImage::Format_RGB32);
+    QImage image(top_scene->sceneRect().size().toSize(), QImage::Format_RGB32);
     image.fill(Qt::white);
     QPainter painter(&image);
-    top_view->render(&painter);
+    top_scene->render(&painter);
     return image;
 }
 
 QImage BoardView4::publishLayoutBot(){
-    this->bot_view->setSceneRect(job->border->toRect());
+    this->bot_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->bot_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
-    QImage image(bot_view->sceneRect().size().toSize(), QImage::Format_RGB32);
+    QImage image(bot_scene->sceneRect().size().toSize(), QImage::Format_RGB32);
     image.fill(Qt::white);
     QPainter painter(&image);
-    bot_view->render(&painter);
+    bot_scene->render(&painter);
+    painter.end();
+    image = image.mirrored(true,false);
     return image;
 }
 
@@ -265,12 +273,15 @@ QImage BoardView4::publishLayoutSolTop(){
 }
 
 QImage BoardView4::publishLayoutSolBot(){
-    this->sol_bot_view->setSceneRect(job->border->toRect());
+    this->sol_bot_scene->setSceneRect(job->border->toRect());
+
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->sol_bot_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
-    QImage image(sol_bot_view->sceneRect().size().toSize(), QImage::Format_RGB32);
+    QImage image(sol_bot_scene->sceneRect().size().toSize(), QImage::Format_RGB32);
     image.fill(Qt::white);
     QPainter painter(&image);
-    sol_bot_view->render(&painter);
+    sol_bot_scene->render(&painter);
+    painter.end();
+    image = image.mirrored(true,false);
     return image;
 }

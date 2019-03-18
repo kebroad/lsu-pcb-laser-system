@@ -41,7 +41,7 @@ QFile * Raster::rasterRoute(QImage* image, int jt){
     //if(file->exists()){
      //   file->reset()
     //}
-    file->open(QIODevice::ReadWrite);//, QIODevice::Truncate)
+    file->open(QIODevice::WriteOnly);//, QIODevice::Truncate)
 
     QTextStream  fstream(file);
     bool laser_off_path = false;
