@@ -91,16 +91,16 @@ public:
     
 private slots:
     void loadTop(){
-        loadFile(job->top_gcode);
+        loadFile(job->top_gcode_data);
     }
     void loadTopSol(){
-        loadFile(job->sol_top_gcode);
+        loadFile(job->sol_top_gcode_data);
     }
     void loadBot(){
-        loadFile(job->bot_gcode);
+        loadFile(job->bot_gcode_data);
     }
     void loadBotSol(){
-        loadFile(job->sol_bot_gcode);
+        loadFile(job->sol_bot_gcode_data);
     }
     void updateHeightMapInterpolationDrawer(bool reset = false);
     void placeVisualizerButtons();
@@ -325,6 +325,9 @@ private:
 
     QStringList m_recentFiles;
     QStringList m_recentHeightmaps;
+    void openFile(QFile * file);
+
+
     void loadFile(QFile file);
     void loadFile(QFile* file);
     void loadFile(QList<QString> data);

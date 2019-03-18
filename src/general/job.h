@@ -35,6 +35,11 @@ public:
     QFile * sol_top_gcode;
     QFile * sol_bot_gcode;
 
+    QList<QString> top_gcode_data;
+    QList<QString> bot_gcode_data;
+    QList<QString> sol_top_gcode_data;
+    QList<QString> sol_bot_gcode_data;
+
 };
 
 #endif // JOB_H

@@ -18,7 +18,7 @@ public:
 
     Raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity);
 
-    QFile*  rasterRoute(QImage* image, int jt = 1);
+    QList<QString>  rasterRoute(QImage* image, int jt = 1);
     bool isWhite(QRgb o);
     double step(int x);
 

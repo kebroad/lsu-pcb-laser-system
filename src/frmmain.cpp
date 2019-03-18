@@ -1491,6 +1491,36 @@ void frmMain::on_cmdFileOpen_clicked()
     }
 }
 
+void frmMain::openFile(QFile * file){
+   /* if (!m_heightMapMode) { */
+        if (!saveChanges(false)) return;
+
+        if (!file->fileName().isEmpty()) m_lastFolder = file->fileName().left(file->fileName().lastIndexOf(QRegExp("[/\\\\]+")));
+
+        if (file->fileName() != "") {
+            addRecentFile(file->fileName());
+            updateRecentFilesMenu();
+
+            loadFile(file);
+        }
+   // }
+
+    /*else {
+        if (!saveChanges(true)) return;
+
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open"), m_lastFolder, tr("Heightmap files (*.map)"));
+
+        if (fileName != "") {
+            addRecentHeightmap(fileName);
+            updateRecentFilesMenu();
+            loadHeightMap(fileName);
+        }
+    } */
+
+
+
+}
+
 void frmMain::resetHeightmap()
 {
     delete m_heightMapInterpolationDrawer.data();
