@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
     Raster r(j, 0.1016, CONSTANT_LASER_POWER_MODE, 1000);
     switch(j->job_type){
     case TOP:
-        r.rasterRoute(j->top, 1);
+        j->top_gcode_data = r.rasterRoute(j->top, 1);
         break;
     case TOP_SOL:
         j->top_gcode_data = r.rasterRoute(j->top, 1);

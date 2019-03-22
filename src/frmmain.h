@@ -325,11 +325,10 @@ private:
 
     QStringList m_recentFiles;
     QStringList m_recentHeightmaps;
-    void openFile(QFile * file);
 
 
-    void loadFile(QFile file);
-    void loadFile(QFile* file);
+
+    void loadFile(QString fileName);
     void loadFile(QList<QString> data);
     void clearTable();
     void preloadSettings();

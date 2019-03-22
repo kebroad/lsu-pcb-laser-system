@@ -1491,35 +1491,7 @@ void frmMain::on_cmdFileOpen_clicked()
     }
 }
 
-void frmMain::openFile(QFile * file){
-   /* if (!m_heightMapMode) { */
-        if (!saveChanges(false)) return;
 
-        if (!file->fileName().isEmpty()) m_lastFolder = file->fileName().left(file->fileName().lastIndexOf(QRegExp("[/\\\\]+")));
-
-        if (file->fileName() != "") {
-            addRecentFile(file->fileName());
-            updateRecentFilesMenu();
-
-            loadFile(file);
-        }
-   // }
-
-    /*else {
-        if (!saveChanges(true)) return;
-
-        QString fileName = QFileDialog::getOpenFileName(this, tr("Open"), m_lastFolder, tr("Heightmap files (*.map)"));
-
-        if (fileName != "") {
-            addRecentHeightmap(fileName);
-            updateRecentFilesMenu();
-            loadHeightMap(fileName);
-        }
-    } */
-
-
-
-}
 
 void frmMain::resetHeightmap()
 {
@@ -1654,43 +1626,20 @@ void frmMain::loadFile(QList<QString> data)
     updateControlsState();
 }
 
-void frmMain::loadFile(QFile file)
+void frmMain::loadFile(QString fileName)
 {
+    QFile file(fileName);
 
     if (!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::critical(this, this->windowTitle(), tr("Can't open file:\n") + file.fileName());
+        QMessageBox::critical(this, this->windowTitle(), tr("Can't open file:\n") + fileName);
         return;
     }
 
     // Set filename
-    m_programFileName = file.fileName();
+    m_programFileName = fileName;
 
     // Prepare text stream
     QTextStream textStream(&file);
-
-    // Read lines
-    QList<QString> data;
-    while (!textStream.atEnd()) data.append(textStream.readLine());
-
-    // Load lines
-    loadFile(data);
-}
-
-void frmMain::loadFile(QFile* file)
-{
-    /*
-    if (!file->open(QIODevice::ReadOnly)) {
-        QMessageBox::critical(this, this->windowTitle(), tr("Can't open file:\n") + file->fileName());
-        return;
-    }
-    */
-    file->open(QIODevice::ReadWrite);
-
-    // Set filename
-    m_programFileName = file->fileName();
-
-    // Prepare text stream
-    QTextStream textStream(file);
 
     // Read lines
     QList<QString> data;
