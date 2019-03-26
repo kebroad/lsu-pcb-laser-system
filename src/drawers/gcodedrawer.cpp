@@ -86,8 +86,8 @@ bool GcodeDrawer::prepareVectors()
         }
 
         // Prepare vertices
-        if (list->at(i)->isFastTraverse()) vertex.start = list->at(i)->getStart();
-        else vertex.start = QVector3D(sNan, sNan, sNan);
+        //if (list->at(i)->isFastTraverse()) vertex.start = list->at(i)->getStart(); REMOVED TO PREVENT DASHES
+        /*else */vertex.start = QVector3D(sNan, sNan, sNan);
 
         // Simplify geometry
         int j = i;
@@ -298,7 +298,13 @@ QVector3D GcodeDrawer::getSegmentColorVector(LineSegment *segment)
 
 QColor GcodeDrawer::getSegmentColor(LineSegment *segment)
 {
-    if (segment->drawn()) return m_colorDrawn;//QVector3D(0.85, 0.85, 0.85);
+    //if (segment->drawn()) return m_colorDrawn;//QVector3D(0.85, 0.85, 0.85);
+    if (segment->isHightlight() && segment->isFastTraverse()) return  QColor(253, 208, 35, 255);
+    else if (!segment->isHightlight() && segment->isFastTraverse()) return  QColor(255, 255, 255, 255);
+    else if (segment->isHightlight() && !segment->isFastTraverse()) return  QColor(70, 29, 124, 255);
+    else if (!segment->isHightlight() && !segment->isFastTraverse()) return  QColor(0, 0, 0, 255);
+    /*
+
     else if (segment->isHightlight()) return m_colorHighlight;//QVector3D(0.57, 0.51, 0.9);
     else if (segment->isFastTraverse()) return m_colorNormal;// QVector3D(0.0, 0.0, 0.0);
     else if (segment->isZMovement()) return m_colorZMovement;//QVector3D(1.0, 0.0, 0.0);
@@ -308,7 +314,8 @@ QColor GcodeDrawer::getSegmentColor(LineSegment *segment)
     case GrayscaleCode::Z:
         return QColor::fromHsl(0, 0, qBound<int>(0, 255 - 255.0 / (m_grayscaleMax - m_grayscaleMin) * segment->getStart().z(), 255));
     }
-    return m_colorNormal;//QVector3D(0.0, 0.0, 0.0);
+    */
+   // return m_colorNormal;//QVector3D(0.0, 0.0, 0.0);
 }
 
 int GcodeDrawer::getSegmentType(LineSegment* segment)
