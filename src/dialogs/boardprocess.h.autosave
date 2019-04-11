@@ -1,0 +1,38 @@
+#ifndef BOARDPROCESS_H
+#define BOARDPROCESS_H
+
+#include <QObject>
+#include <QWidget>
+#include <QRadioButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QGroupBox>
+
+#include "general/job.h"
+
+class BoardProcess : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit BoardProcess(QWidget *parent = nullptr, Job * j = new Job);
+    Job * job;
+       QVBoxLayout main_layout;
+       QLabel   presets;
+       QGroupBox * exposure_box;
+       QGroupBox* soldermask_box;
+       QGroupBox* mask_box;
+       QVBoxLayout  soldermask_layout;
+       QVBoxLayout  mask_layout;
+       
+       QGroupBox shared_box;
+
+
+
+       QPushButton  start_job;
+signals:
+
+public slots:
+};
+
+#endif // BOARDPROCESS_H
