@@ -1,13 +1,13 @@
 #include "boardselector.h"
 
 
-BoardSelector1::BoardSelector1(int number, QPoint o, QWidget *parent) : QWidget(parent)
+BoardSelector1::BoardSelector1(int number, Job * job, QWidget *parent) : QWidget(parent)
 {
     QString title = "board #";
     title.append(QString::number(number));
     QGroupBox * top = new QGroupBox(title, this);
     layout = new QVBoxLayout;
-    board = new Board1(o);
+    board = new Board1(job->origin, job->invert);
     layer = new QLabel("Top Layer");
     name = new QLabel("No file selected");
     select = new QPushButton(tr("Upload"));
@@ -26,9 +26,9 @@ BoardSelector1::~BoardSelector1(){
     delete this;
 }
 
-BoardSelector2::BoardSelector2(int number, QPoint o, QWidget *parent) : QWidget(parent)
+BoardSelector2::BoardSelector2(int number, Job* job, QWidget *parent) : QWidget(parent)
 {
-    board = new Board2(o);
+    board = new Board2(job->origin, job->invert);
 
     QString title = "board #";
     title.append(QString::number(number));
@@ -66,9 +66,9 @@ BoardSelector2::BoardSelector2(int number, QPoint o, QWidget *parent) : QWidget(
 
 
 
-BoardSelector3::BoardSelector3(int number, QPoint o, QWidget *parent) : QWidget (parent)
+BoardSelector3::BoardSelector3(int number, Job * job, QWidget *parent) : QWidget (parent)
 {
-    board = new Board3(o);
+    board = new Board3(job->origin, job->invert);
 
     QString title = "board #";
     title.append(QString::number(number));
@@ -104,9 +104,9 @@ BoardSelector3::BoardSelector3(int number, QPoint o, QWidget *parent) : QWidget 
     main->setLayout(main_layout);
 }
 
-BoardSelector4::BoardSelector4(int number, QPoint o, QWidget *parent) : QWidget (parent)
+BoardSelector4::BoardSelector4(int number, Job * job, QWidget *parent) : QWidget (parent)
 {
-    board = new Board4(o);
+    board = new Board4(job->origin, job->invert);
 
     QString title = "board #";
     title.append(QString::number(number));

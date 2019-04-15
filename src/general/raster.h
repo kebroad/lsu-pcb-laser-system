@@ -15,15 +15,16 @@ public:
     Job* job;
     double step_amt;
     int laser_intensity = 255;
+    int speed = 750;
 
-    Raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity);
+    Raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity, int speed);
 
     QList<QString>  rasterRoute(QImage* image, int jt = 1);
 
-    int Raster::findXMIN(QImage * image);
-    int Raster::findXMAX(QImage * image);
-    int Raster::findYMIN(QImage * image);
-    int Raster::findYMAX(QImage * image);
+    int findXMIN(QImage * image);
+    int findXMAX(QImage * image);
+    int findYMIN(QImage * image);
+    int findYMAX(QImage * image);
 
     bool isWhite(QRgb o);
     double step(int x);

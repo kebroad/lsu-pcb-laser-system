@@ -18,6 +18,11 @@ public:
     int d_x = 200;
     int d_y = 200;
 
+    int power;
+    int speed;
+    bool invert;
+
+
     QRectF* border;
     double border_width = 0;
     double border_height = 0;

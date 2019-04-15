@@ -9,11 +9,14 @@
 class Board1 : public QGraphicsPixmapItem
 {
 public:
-   Board1(QPoint o)  {
-      setPos(o);
-      setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+    bool invert;
+    Board1(QPoint o, bool invert)  {
+        setPos(o);
+        setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
+        this->invert = invert;
    }
+
    void setBoardTop(QPixmap p);
 };
 
@@ -21,11 +24,13 @@ public:
 class Board2 : public QGraphicsPixmapItem
 {
 public:
-   Board2(QPoint o)  {
+   bool invert;
+   Board2(QPoint o, bool invert)  {
       setPos(o);
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
       sol_top = new QGraphicsPixmapItem;
+      this->invert = invert;
    }
    void setBoardTop(QPixmap p);
    void setBoardSolTop(QPixmap p);
@@ -38,11 +43,13 @@ private:
 class Board3 : public QGraphicsPixmapItem
 {
 public:
-   Board3(QPoint o)  {
+    bool invert;
+   Board3(QPoint o, bool invert)  {
       setPos(o);
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
       bot = new QGraphicsPixmapItem;
+      this->invert = invert;
    }
    void setBoardTop(QPixmap p);
    void setBoardBot(QPixmap p);
@@ -55,13 +62,15 @@ private:
 class Board4 : public QGraphicsPixmapItem
 {
 public:
-   Board4(QPoint o)  {
+    bool invert;
+   Board4(QPoint o, bool invert)  {
       setPos(o);
       setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
                QGraphicsItem::ItemSendsGeometryChanges);
       bot = new QGraphicsPixmapItem;
       sol_top = new QGraphicsPixmapItem;
       sol_bot = new QGraphicsPixmapItem;
+      this->invert = invert;
    }
    void setBoardTop(QPixmap p);
    void setBoardBot(QPixmap p);

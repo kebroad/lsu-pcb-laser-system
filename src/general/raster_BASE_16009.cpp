@@ -1,15 +1,12 @@
 #include "raster.h"
 
 
-Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int speed)
+Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity)
 {
     this->job = j;
     this->step_amt = stp;
     this->laser_mode = l_mode;
     this->laser_intensity = laser_intensity;
-
-    this->speed = speed;
-
 }
 
 double Raster::step(int x){
@@ -22,65 +19,13 @@ bool Raster::isWhite(QRgb o){
 }
 
 
-int Raster::findXMIN(QImage * image){
-    int min = image->width()-1;
-    for(int i = 0; i < image->height(); i++){
-        QRgb *line = (QRgb*) image->scanLine(i);
-        for (int j = 0; j < image->width(); j++)
-            if((!this->isWhite(line[j])) && j < min )
-                min = j;
-    }
-    return min;
-}
-
-int Raster::findXMAX(QImage * image){
-    int max = 0;
-    for(int i = 0; i < image->height(); i++){
-        QRgb *line = (QRgb*) image->scanLine(i);
-        for (int j = 0; j < image->width(); j++)
-            if((!this->isWhite(line[j])) && j > max )
-                max = j;
-    }
-    return max;
-}
-
-int Raster::findYMIN(QImage * image){
-    int min = image->height() -1;
-    for(int i = 0; i < image->height(); i++){
-        QRgb *line = (QRgb*) image->scanLine(i);
-        for (int j = 0; j < image->width(); j++)
-            if((!this->isWhite(line[j])) && i < min )
-                min = i;
-    }
-    return min;
-}
-
-int Raster::findYMAX(QImage * image){
-    int max = 0;
-    for(int i = 0; i < image->height(); i++){
-        QRgb *line = (QRgb*) image->scanLine(i);
-        for (int j = 0; j < image->width(); j++)
-            if((!this->isWhite(line[j])) && i > max )
-                max = i;
-    }
-    return max;
-}
-
-
 QList<QString> Raster::rasterRoute(QImage* image, int jt){
-    *image = image->mirrored(false,true);
-    int xmin = this->findXMIN(image);
-    int xmax = this->findXMAX(image);
-    int ymin = this->findYMIN(image);
-    int ymax = this->findYMAX(image);
+
     QString temp;
     QTextStream  fstream(&temp);
-    //image->invertPixels();
-
     bool laser_off_path = false;
     bool laser_on_path = false;
     fstream << "G90" << endl;
-    fstream << "F350" << endl;
     fstream << "G0 X0 Y0 Z0" << endl;
     if(this->laser_mode == CONSTANT_LASER_POWER_MODE){
             fstream << "M3 S0" << endl;
@@ -89,11 +34,11 @@ QList<QString> Raster::rasterRoute(QImage* image, int jt){
             fstream << "M4 S0" << endl;
     }
 
-    for(int i = ymin; i < ymax + 1; i++){
+    for(int i = 0; i < image->height(); i++){
         int path_origin = 0;
         QRgb *line = (QRgb*) image->scanLine(i);
         if(i % 2 == 0){ //Odd line #'s, starting with 0, left to right
-            for (int j = xmin ; j < xmax+1; j++) {
+            for (int j = 0; j < image->width(); j++) {
                 if(isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
                 else if(isWhite(line[j]) && laser_on_path){ // if currently on a laser on path
                         fstream << "G1 X" << step(j-1) << " S" << this->laser_intensity << endl;
@@ -123,7 +68,7 @@ QList<QString> Raster::rasterRoute(QImage* image, int jt){
 
         }
         else{
-            for(int j = xmax+1; j > xmin; j--){
+            for(int j = image->width()-1; j > 0; j--){
                 if(isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
                 else if(isWhite(line[j]) && laser_on_path){ // if currently on a laser on path
                         fstream << "G1 X" << step(j+1) << " S" << this->laser_intensity << endl;

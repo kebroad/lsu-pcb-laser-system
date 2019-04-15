@@ -34,6 +34,9 @@ public slots:
     void go_next(){
         switch (w->currentIndex()){
             case 0:
+                job->speed = this->t->speed->text().toInt();
+                job->power = this->t->power->text().toInt();
+                job->invert = this->t->invert->isChecked();
                 if(this->t->top->isChecked()){
                     job->job_type = TOP;
                     w->setCurrentIndex(1);
@@ -51,6 +54,11 @@ public slots:
                 }
                 else if(this->t->top_bot_sol->isChecked()){
                     job->job_type = TOP_BOT_SOL;
+                    w->setCurrentIndex(1);
+                    previous->show();
+                }
+                else if(this->t->mask->isChecked()){
+                    job->job_type = TOP;
                     w->setCurrentIndex(1);
                     previous->show();
                 }

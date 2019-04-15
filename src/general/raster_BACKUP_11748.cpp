@@ -7,9 +7,12 @@ Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int sp
     this->step_amt = stp;
     this->laser_mode = l_mode;
     this->laser_intensity = laser_intensity;
+<<<<<<< Updated upstream
 
+
+=======
     this->speed = speed;
-
+>>>>>>> Stashed changes
 }
 
 double Raster::step(int x){

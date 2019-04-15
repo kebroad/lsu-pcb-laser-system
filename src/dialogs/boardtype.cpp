@@ -2,19 +2,55 @@
 
 BoardType::BoardType(QWidget *parent) : QWidget(parent)
 {
+    invert = new QRadioButton;
+    invert->setAutoExclusive(false);
      main_layout = new QVBoxLayout(this);
      logo = new QLabel;
      description = new QLabel(tr("Please select a board type:"));
+     mask = new QRadioButton("Photolith Mask");
      top = new QRadioButton("Top Side Only");
      top_sol = new QRadioButton("Top Side with Soldermask");
      top_bot = new QRadioButton("Top and Bottom Side");
      top_bot_sol = new QRadioButton("Top and Bottom Side with Soldermask");
 
+     speed_layout = new QHBoxLayout;
+     power_layout = new QHBoxLayout;
+     invert_layout = new QHBoxLayout;
+
+     power = new QLineEdit;
+     speed = new QLineEdit;
+
+
+     speed_label = new QLabel(tr("Speed:"));
+     power_label = new QLabel(tr("Power:"));
+     invert_label = new QLabel(tr("Inverted:"));
+
+     speed_layout->addWidget(speed_label);
+     speed_layout->addWidget(speed);
+
+     power_layout->addWidget(power_label);
+     power_layout->addWidget(power);
+
+     invert_layout->addWidget(invert_label);
+     invert_layout->addWidget(invert);
+
+     QObject::connect(mask, SIGNAL(toggled(bool)), this, SLOT(set_mask(bool)));
+     QObject::connect(top, SIGNAL(toggled(bool)), this, SLOT(set_top(bool)));
+     QObject::connect(top_sol, SIGNAL(toggled(bool)), this, SLOT(set_top_sol(bool)));
+     QObject::connect(top_bot, SIGNAL(toggled(bool)), this, SLOT(set_top_bot(bool)));
+     QObject::connect(top_bot_sol, SIGNAL(toggled(bool)), this, SLOT(set_top_bot_sol(bool)));
+
+
      main_layout->addWidget(description);
+     main_layout->addWidget(mask);
      main_layout->addWidget(top);
      main_layout->addWidget(top_sol);
      main_layout->addWidget(top_bot);
      main_layout->addWidget(top_bot_sol);
 
+
+     main_layout->addLayout(speed_layout);
+     main_layout->addLayout(power_layout);
+     main_layout->addLayout(invert_layout);
 
 }

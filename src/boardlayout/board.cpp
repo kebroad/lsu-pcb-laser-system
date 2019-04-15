@@ -2,17 +2,38 @@
 
 
 void Board1::setBoardTop(QPixmap p){
-    setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    setPixmap(pix);
 }
 
 /*******************************************************************************/
 
 void Board2::setBoardTop(QPixmap p){
-    setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    setPixmap(pix);
 }
 
 void Board2::setBoardSolTop(QPixmap p){
-    sol_top->setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    sol_top->setPixmap(pix);
 }
 
 QVariant Board2::itemChange(GraphicsItemChange change, const QVariant &value){
@@ -28,11 +49,24 @@ QVariant Board2::itemChange(GraphicsItemChange change, const QVariant &value){
 /********************************************************************************/
 
 void Board3::setBoardTop(QPixmap p){
-    setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    pix.fromImage(i);
+    }
+    setPixmap(pix);
 }
 
 void Board3::setBoardBot(QPixmap p){
-    bot->setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    bot->setPixmap(pix);
 }
 
 QVariant Board3::itemChange(GraphicsItemChange change, const QVariant &value){
@@ -45,19 +79,47 @@ QVariant Board3::itemChange(GraphicsItemChange change, const QVariant &value){
 
 /********************************************************************************/
 void Board4::setBoardTop(QPixmap p){
-    setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    setPixmap(pix);
 }
 
 void Board4::setBoardBot(QPixmap p){
-    bot->setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    bot->setPixmap(pix);
 }
 
 void Board4::setBoardSolTop(QPixmap p){
-    sol_top->setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    sol_top->setPixmap(pix);
 }
 
 void Board4::setBoardSolBot(QPixmap p){
-    sol_bot->setPixmap(p);
+    QPixmap pix = p;
+    if(this->invert){
+    QImage i = p.toImage();
+    i.invertPixels();
+    QPixmap pix;
+    pix.fromImage(i);
+    }
+    sol_bot->setPixmap(pix);
 }
 
 QVariant Board4::itemChange(GraphicsItemChange change, const QVariant &value){

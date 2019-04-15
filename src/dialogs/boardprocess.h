@@ -6,7 +6,8 @@
 #include <QRadioButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-
+#include <QLabel>
+#include <QPushButton>
 #include "general/job.h"
 
 class BoardProcess : public QWidget
@@ -19,11 +20,11 @@ public:
        QLabel *  presets;
        QVBoxLayout * exposure_layout;
        QVBoxLayout * soldermask_layout;
-       QVBoxLayout *
 
 
 
-       QPushButton * start_job;
+
+        QPushButton * start_job;
 signals:
 
 public slots:

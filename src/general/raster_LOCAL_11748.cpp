@@ -1,14 +1,13 @@
 #include "raster.h"
 
 
-Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int speed)
+Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity)
 {
     this->job = j;
     this->step_amt = stp;
     this->laser_mode = l_mode;
     this->laser_intensity = laser_intensity;
 
-    this->speed = speed;
 
 }
 
