@@ -19,6 +19,12 @@ public:
     Raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity);
 
     QList<QString>  rasterRoute(QImage* image, int jt = 1);
+
+    int Raster::findXMIN(QImage * image);
+    int Raster::findXMAX(QImage * image);
+    int Raster::findYMIN(QImage * image);
+    int Raster::findYMAX(QImage * image);
+
     bool isWhite(QRgb o);
     double step(int x);
 

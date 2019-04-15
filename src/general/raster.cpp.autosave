@@ -122,7 +122,7 @@ QList<QString> Raster::rasterRoute(QImage* image, int jt){
 
         }
         else{
-            for(int j = xmax+1; j > xmin; j--){
+            for(int j = xmax-1; j > xmin; j--){
                 if(isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
                 else if(isWhite(line[j]) && laser_on_path){ // if currently on a laser on path
                         fstream << "G1 X" << step(j+1) << " S" << this->laser_intensity << endl;

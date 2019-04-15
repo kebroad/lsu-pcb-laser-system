@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
     Job * j = new Job;
     StartingWidget sw(NULL, j);
     int isacc = sw.exec();
-    Raster r(j, 0.1016, CONSTANT_LASER_POWER_MODE, 1000);
+    Raster r(j, 0.0508, CONSTANT_LASER_POWER_MODE, 135);
     switch(j->job_type){
     case TOP:
         j->top_gcode_data = r.rasterRoute(j->top, 1);
