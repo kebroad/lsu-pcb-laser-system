@@ -6,8 +6,7 @@ void Board1::setBoardTop(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     setPixmap(pix);
 }
@@ -19,8 +18,7 @@ void Board2::setBoardTop(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     setPixmap(pix);
 }
@@ -30,8 +28,7 @@ void Board2::setBoardSolTop(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     sol_top->setPixmap(pix);
 }
@@ -53,7 +50,7 @@ void Board3::setBoardTop(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     setPixmap(pix);
 }
@@ -63,8 +60,7 @@ void Board3::setBoardBot(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     bot->setPixmap(pix);
 }
@@ -83,8 +79,7 @@ void Board4::setBoardTop(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     setPixmap(pix);
 }
@@ -94,8 +89,7 @@ void Board4::setBoardBot(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     bot->setPixmap(pix);
 }
@@ -105,8 +99,7 @@ void Board4::setBoardSolTop(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     sol_top->setPixmap(pix);
 }
@@ -116,8 +109,7 @@ void Board4::setBoardSolBot(QPixmap p){
     if(this->invert){
     QImage i = p.toImage();
     i.invertPixels();
-    QPixmap pix;
-    pix.fromImage(i);
+    pix = pix.fromImage(i);
     }
     sol_bot->setPixmap(pix);
 }

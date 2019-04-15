@@ -12,7 +12,7 @@ public:
     bool invert;
     Board1(QPoint o, bool invert)  {
         setPos(o);
-        setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+        setFlags(QGraphicsItem::ItemIsMovable |
                QGraphicsItem::ItemSendsGeometryChanges);
         this->invert = invert;
    }
@@ -27,7 +27,7 @@ public:
    bool invert;
    Board2(QPoint o, bool invert)  {
       setPos(o);
-      setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+      setFlags(QGraphicsItem::ItemIsMovable |
                QGraphicsItem::ItemSendsGeometryChanges);
       sol_top = new QGraphicsPixmapItem;
       this->invert = invert;
@@ -46,7 +46,7 @@ public:
     bool invert;
    Board3(QPoint o, bool invert)  {
       setPos(o);
-      setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+      setFlags(QGraphicsItem::ItemIsMovable |
                QGraphicsItem::ItemSendsGeometryChanges);
       bot = new QGraphicsPixmapItem;
       this->invert = invert;
@@ -65,7 +65,7 @@ public:
     bool invert;
    Board4(QPoint o, bool invert)  {
       setPos(o);
-      setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable |
+      setFlags(QGraphicsItem::ItemIsMovable |
                QGraphicsItem::ItemSendsGeometryChanges);
       bot = new QGraphicsPixmapItem;
       sol_top = new QGraphicsPixmapItem;
