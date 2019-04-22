@@ -20,6 +20,7 @@ public:
 
     int power;
     int speed;
+    int dpi;
     bool invert;
 
 

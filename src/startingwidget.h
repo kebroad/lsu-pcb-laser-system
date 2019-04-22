@@ -37,6 +37,7 @@ public slots:
                 job->speed = this->t->speed->text().toInt();
                 job->power = this->t->power->text().toInt();
                 job->invert = this->t->invert->isChecked();
+                job->dpi = this->t->dpi->text().toInt();
                 if(this->t->top->isChecked()){
                     job->job_type = TOP;
                     w->setCurrentIndex(1);

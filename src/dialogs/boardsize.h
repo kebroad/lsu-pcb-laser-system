@@ -20,8 +20,8 @@ class BoardSize : public QWidget
     Q_OBJECT
 public:
 
-    int DPI = 500;
-    int toDPI(int m){return this->DPI* m;};
+
+    int toDPI(int m){return this->job->dpi* m;};
     explicit BoardSize(QWidget *parent = nullptr, Job * j = new Job);
     Job * job;
     QVBoxLayout * main_layout;

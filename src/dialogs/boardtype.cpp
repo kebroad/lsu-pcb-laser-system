@@ -16,14 +16,17 @@ BoardType::BoardType(QWidget *parent) : QWidget(parent)
      speed_layout = new QHBoxLayout;
      power_layout = new QHBoxLayout;
      invert_layout = new QHBoxLayout;
+     dpi_layout = new QHBoxLayout;
 
      power = new QLineEdit;
      speed = new QLineEdit;
+     dpi = new QLineEdit;
 
 
      speed_label = new QLabel(tr("Speed:"));
      power_label = new QLabel(tr("Power:"));
      invert_label = new QLabel(tr("Inverted:"));
+     dpi_label = new QLabel(tr("DPI:"));
 
      speed_layout->addWidget(speed_label);
      speed_layout->addWidget(speed);
@@ -33,6 +36,9 @@ BoardType::BoardType(QWidget *parent) : QWidget(parent)
 
      invert_layout->addWidget(invert_label);
      invert_layout->addWidget(invert);
+
+     dpi_layout->addWidget(dpi_label);
+     dpi_layout->addWidget(dpi);
 
      QObject::connect(mask, SIGNAL(toggled(bool)), this, SLOT(set_mask(bool)));
      QObject::connect(top, SIGNAL(toggled(bool)), this, SLOT(set_top(bool)));
@@ -52,5 +58,5 @@ BoardType::BoardType(QWidget *parent) : QWidget(parent)
      main_layout->addLayout(speed_layout);
      main_layout->addLayout(power_layout);
      main_layout->addLayout(invert_layout);
-
+     main_layout->addLayout(dpi_layout);
 }

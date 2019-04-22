@@ -24,10 +24,13 @@ public:
     QHBoxLayout * speed_layout;
     QHBoxLayout * power_layout;
     QHBoxLayout * invert_layout;
+    QHBoxLayout * dpi_layout;
 
     QLabel * speed_label;
     QLabel * power_label;
     QLabel * invert_label;
+    QLabel * dpi_label;
+    QLineEdit* dpi;
     QLineEdit* speed;
     QLineEdit* power;
     QRadioButton * invert;
@@ -47,6 +50,7 @@ public slots:
             power->setText("900");
             speed->setText("600");
             invert->setChecked(false);
+            dpi->setText("500");
         }
     }
     void set_top(bool checked){
@@ -54,6 +58,7 @@ public slots:
             power->setText("135");
             speed->setText("750");
             invert->setChecked(true);
+            dpi->setText("500");
         }
     }
     void set_top_sol(bool checked){
@@ -61,6 +66,7 @@ public slots:
             power->setText("135");
             speed->setText("750");
             invert->setChecked(true);
+            dpi->setText("500");
         }
     }
     void set_top_bot(bool checked){
@@ -68,7 +74,7 @@ public slots:
             power->setText("135");
             speed->setText("750");
             invert->setChecked(true);
-
+            dpi->setText("500");
         }
     }
     void set_top_bot_sol(bool checked){
