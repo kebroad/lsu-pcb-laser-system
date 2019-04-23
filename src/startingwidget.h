@@ -38,6 +38,8 @@ public slots:
                 job->power = this->t->power->text().toInt();
                 job->invert = this->t->invert->isChecked();
                 job->dpi = this->t->dpi->text().toInt();
+                this->s = new BoardSize(NULL, this->job);
+                w->insertWidget(1,s);
                 if(this->t->top->isChecked()){
                     job->job_type = TOP;
                     w->setCurrentIndex(1);

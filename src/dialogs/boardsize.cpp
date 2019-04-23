@@ -3,6 +3,7 @@
 BoardSize::BoardSize(QWidget *parent, Job * j) : QWidget(parent)
 {
     job = j;
+    dpi = this->job->dpi;
     main_layout = new QVBoxLayout(this);
     description = new QLabel(tr("Please select a board size:"));
     sizeopt1 = new QRadioButton(tr("4 Inches x 6 Inches"));
@@ -30,3 +31,5 @@ BoardSize::BoardSize(QWidget *parent, Job * j) : QWidget(parent)
 
 
 }
+
+ int BoardSize::toDPI(int m){return dpi* m;}

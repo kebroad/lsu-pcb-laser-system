@@ -25,7 +25,7 @@ void Board2::setBoardTop(QPixmap p){
 
 void Board2::setBoardSolTop(QPixmap p){
     QPixmap pix = p;
-    if(this->invert){
+    if(!this->invert){
     QImage i = p.toImage();
     i.invertPixels();
     pix = pix.fromImage(i);
@@ -96,7 +96,7 @@ void Board4::setBoardBot(QPixmap p){
 
 void Board4::setBoardSolTop(QPixmap p){
     QPixmap pix = p;
-    if(this->invert){
+    if(!this->invert){
     QImage i = p.toImage();
     i.invertPixels();
     pix = pix.fromImage(i);
@@ -106,7 +106,7 @@ void Board4::setBoardSolTop(QPixmap p){
 
 void Board4::setBoardSolBot(QPixmap p){
     QPixmap pix = p;
-    if(this->invert){
+    if(!this->invert){
     QImage i = p.toImage();
     i.invertPixels();
     pix = pix.fromImage(i);

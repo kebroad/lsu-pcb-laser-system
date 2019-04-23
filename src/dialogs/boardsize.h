@@ -21,8 +21,10 @@ class BoardSize : public QWidget
 public:
 
 
-    int toDPI(int m){return this->job->dpi* m;};
+
     explicit BoardSize(QWidget *parent = nullptr, Job * j = new Job);
+    int dpi;
+    int toDPI(int m);
     Job * job;
     QVBoxLayout * main_layout;
     QHBoxLayout * custom;

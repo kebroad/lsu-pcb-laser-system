@@ -80,7 +80,7 @@ QList<QString> Raster::rasterRoute(QImage* image, int jt){
     bool laser_off_path = false;
     bool laser_on_path = false;
     fstream << "G90" << endl;
-    fstream << "F350" << endl;
+    fstream << "F" << this->speed << endl;
     fstream << "G0 X0 Y0 Z0" << endl;
     if(this->laser_mode == CONSTANT_LASER_POWER_MODE){
             fstream << "M3 S0" << endl;
