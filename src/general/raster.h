@@ -21,6 +21,15 @@ public:
 
     QList<QString>  rasterRoute(QImage* image, int jt = 1);
 
+
+    QList<QString>  isolateRoute(QImage * image);
+
+    QImage* refineImage(QImage * image, int pixels);
+
+    QList<QPoint> createLaserPoints(QImage* image);
+
+    QPoint findClosest(QList<QPoint> list, QPoint original);
+
     int findXMIN(QImage * image);
     int findXMAX(QImage * image);
     int findYMIN(QImage * image);

@@ -163,3 +163,125 @@ QList<QString> Raster::rasterRoute(QImage* image, int jt){
 }
 
 
+
+
+
+QImage* Raster::refineImage(QImage * image, int pixels){
+    QImage * refined_image = new QImage(*image);
+    for(int i = 0; i < image->height(); i++){
+        for (int j = 0; j < image->width(); j++) {
+            if(!this->isWhite(image->pixel(j,i))){
+                for(int p = 1; p < pixels; p++){
+                    if(this->isWhite(image->pixel(j+p,i))
+                    || this->isWhite(image->pixel(j-p, i))
+                    || this->isWhite(image->pixel(j, i+p))
+                    || this->isWhite(image->pixel(j, i-p))
+                    ){
+                        refined_image->setPixelColor(j, i, QColor(255,255,255));
+                    }
+                }
+
+            }
+
+    }
+    }
+    return refined_image;
+}
+
+bool isWhite(QColor c){
+        return (c == Qt::white);
+}
+
+bool nextWithinBorders(QPoint point, QImage* image ){
+    return (image->pixelColor(point) != Qt::white) && (point->x() < image->width()) && (point->y() < image->height()) && (point->x() > -1) && (point->y() > -1)
+}
+
+
+enum Direction {UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT};
+
+QList<QPoint> createLaserPoints(QImage* image){
+    QList<QPoint> points;
+    for(int i = 0; i < image->height(); i++){
+        QRgb *line = (QRgb*) image->scanLine(i);
+        for(int j = 0; j < image->width(); j++){
+            if(!isWhite(line[j])){
+                points.append(QPoint(j,i));
+            }
+        }
+    }
+    return points;
+
+}
+
+
+
+QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
+    if(list.isEmpty())
+        return QPoint(-1,-1);
+    QPoint rpoint = list.first();
+    for(int i = 1; i <list.size(); i++){
+        QPoint pold = original - rpoint;
+        QPoint pnew = original - list.at(i);
+        if(pnew.manhattanLength() < pold.manhattanLength())
+            rpoint = list.at(i);
+    }
+    return rpoint;
+}
+
+
+QList<QString> Raster::isolateRoute(QImage* image){
+    *image = image->mirrored(false,true);
+
+    QString temp;
+    QTextStream  fstream(&temp);
+
+    QImage* refined_image = this->refineImage(image, 2);
+    QList <QPoint> laser_points = this->createLaserPoints(refined_image);
+
+    QPoint previous_point = this->findClosest(laser_points, QPoint(0,0));
+    Direction previous_dir;
+    bool new_path = true;
+    while(!laser_points.empty()){
+        if(new_path){
+            fstream << "G0 X" <<  previous_point.x() << " Y" << previous_point.y() << "S0" << endl;
+            new_path = false;
+        }
+        else{
+         //   previous_dir = this->findLongestPathDir(laser_points, Q)
+        }
+        assert(!laser_points.removeOne(previous_point));
+        switch(previous_dir){
+            if(this->canContinue())
+
+    }
+
+
+    bool laser_off_path = false;
+    bool laser_on_path = false;
+    fstream << "G90" << endl;
+    fstream << "F" << this->speed << endl;
+    fstream << "G0 X0 Y0 Z0" << endl;
+    if(this->laser_mode == CONSTANT_LASER_POWER_MODE){
+            fstream << "M3 S0" << endl;
+    }
+    else if (this->laser_mode == DYNAMIC_LASER_POWER_MODE){
+            fstream << "M4 S0" << endl;
+    }
+    QPoint path_origin = QPoint(0,0);
+    QPoint previous = QPoint(0,0);
+    //while(not_white){
+    path_origin = this->findClosestPoint(refined_image, previous);
+    fstream << "G0 X" << step(path_origin.x()) << " Y" << step(path_origin.y()) << endl;
+    }
+
+
+    fstream << "M5" << endl;
+    fstream << "G0 X0 Y0 Z0 S0" << endl;
+    fstream.seek(0);
+    QList<QString> data;
+    while (!fstream.atEnd()) data.append(fstream.readLine());
+    fstream.reset();
+
+    return data;
+}
+*/

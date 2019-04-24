@@ -103,6 +103,15 @@ int main(int argc, char *argv[])
     int isacc = sw.exec();
 
     Raster r(j, 0.0508, CONSTANT_LASER_POWER_MODE, j->power, j->speed);
+    QFile filea("top_before.png");
+    filea.open(QIODevice::WriteOnly);
+    j->top->save(&filea, "PNG");
+    filea.close();
+    j->top = r.refineImage(j->top, 2);
+    QFile fileb("top_after.png");
+    fileb.open(QIODevice::WriteOnly);
+    j->top->save(&fileb, "PNG");
+    fileb.close();
 
     switch(j->job_type){
     case TOP:
