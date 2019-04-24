@@ -32,4 +32,4 @@ BoardSize::BoardSize(QWidget *parent, Job * j) : QWidget(parent)
 
 }
 
- int BoardSize::toDPI(int m){return dpi* m;}
+ int BoardSize::toDPI(double m){return dpi* m;}

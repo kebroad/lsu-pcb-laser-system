@@ -83,8 +83,8 @@ public slots:
                         this->job->graphInit();
                 }
                 else if(this->s->sizecust->isChecked()){
-                    job->height =  this->s->toDPI(this->s->height->text().toInt());
-                    job->width =  this->s->toDPI(this->s->width->text().toInt());
+                    job->height =  this->s->toDPI(this->s->height->text().toDouble());
+                    job->width =  this->s->toDPI(this->s->width->text().toDouble());
                     this->job->graphInit();
                     this->l = new BoardLayoutWidget(NULL, this->job);
 
