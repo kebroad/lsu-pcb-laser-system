@@ -47,8 +47,8 @@ signals:
 public slots:
     void set_mask(bool checked){
         if(true){
-            power->setText("675");
-            speed->setText("750");
+            power->setText("650");
+            speed->setText("1000");
             invert->setChecked(false);
             dpi->setText("500");
         }
