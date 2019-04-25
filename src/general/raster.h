@@ -6,6 +6,8 @@
 #include <QTextStream>
 #include "job.h"
 
+enum Direction {UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT};
+
 enum LaserMode {CONSTANT_LASER_POWER_MODE, DYNAMIC_LASER_POWER_MODE};
 
 class Raster
@@ -29,6 +31,12 @@ public:
     QList<QPoint> createLaserPoints(QImage* image);
 
     QPoint findClosest(QList<QPoint> list, QPoint original);
+
+    Direction findLongestPathDir(QList<QPoint> list, QPoint point);
+
+    QPoint nextPoint(QPoint point, Direction dir);
+
+
 
     int findXMIN(QImage * image);
     int findXMAX(QImage * image);

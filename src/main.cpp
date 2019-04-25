@@ -103,6 +103,7 @@ int main(int argc, char *argv[])
     int isacc = sw.exec();
 
     Raster r(j, 0.0508, CONSTANT_LASER_POWER_MODE, j->power, j->speed);
+    /*
     QFile filea("top_before.png");
     filea.open(QIODevice::WriteOnly);
     j->top->save(&filea, "PNG");
@@ -112,10 +113,12 @@ int main(int argc, char *argv[])
     fileb.open(QIODevice::WriteOnly);
     j->top->save(&fileb, "PNG");
     fileb.close();
+    */
 
     switch(j->job_type){
     case TOP:
-        j->top_gcode_data = r.rasterRoute(j->top, 1);
+        j->top_gcode_data = r.isolateRoute(j->top);
+        //j->top_gcode_data = r.rasterRoute(j->top, 1);
         break;
     case TOP_SOL:
         j->top_gcode_data = r.rasterRoute(j->top, 1);
