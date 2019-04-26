@@ -212,9 +212,11 @@ QHash <QPoint, bool> Raster::createLaserPoints(QImage* image){
 
 
 
-QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
+QPoint Raster::findClosest(QHash<QPoint, bool> list, QPoint original){
     if(list.isEmpty())
         return QPoint(-1,-1);
+    if(list.size() == 2)
+        QPoint p1 = original - list.
     QPoint rpoint = list.first();
     for(int i = 1; i <list.size(); i++){
         QPoint pold = original - rpoint;
@@ -225,7 +227,7 @@ QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
     return rpoint;
 }
 
-Direction Raster::findLongestPathDir(QList<QPoint> list, QPoint point){
+Direction Raster::findLongestPathDir(QHash<QPoint, bool> list, QPoint point){
     //for(Direction d = (Direction)0; d < directions; d =(Direction)(d+1))
     int counter = 0;
     Direction rdir = UP;
@@ -236,7 +238,7 @@ Direction Raster::findLongestPathDir(QList<QPoint> list, QPoint point){
             newcount++;
             p = this->nextPoint(point, (Direction)i);
         }
-        while(list.indexOf(p) != -1);
+        while(list.contains(p));
         if(newcount > counter){
             rdir = (Direction)i;
             counter = newcount;
