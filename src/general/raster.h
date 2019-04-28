@@ -28,11 +28,11 @@ public:
 
     QImage* refineImage(QImage * image, int pixels);
 
-    QList<QPoint> createLaserPoints(QImage* image);
+    QHash<QPoint, bool> createLaserPoints(QImage* image);
 
-    QPoint findClosest(QList<QPoint> list, QPoint original);
+    QPoint findClosest(QHash<QPoint, bool> list, QPoint original);
 
-    Direction findLongestPathDir(QList<QPoint> list, QPoint point);
+    Direction findLongestPathDir(QHash<QPoint, bool> list, QPoint point);
 
     QPoint nextPoint(QPoint point, Direction dir);
 

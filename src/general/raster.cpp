@@ -193,7 +193,10 @@ bool isWhite(QColor c){
 }
 
 
-
+inline uint qHash (const QPoint & key)
+{
+    return qHash (QPair<int,int>(key.x(), key.y()) );
+}
 
 
 
@@ -212,20 +215,34 @@ QHash <QPoint, bool> Raster::createLaserPoints(QImage* image){
 
 
 
-QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
+QPoint Raster::findClosest(QHash<QPoint, bool> list, QPoint original){
     if(list.isEmpty())
         return QPoint(-1,-1);
-    QPoint rpoint = list.first();
-    for(int i = 1; i <list.size(); i++){
+    for(int i = 0; i < 8; i++){ //check points around to make it faster
+        QPoint p = nextPoint(original, (Direction)i);
+        if(list.value(p, false) != false)
+                return p;
+    }
+
+
+
+    /*              old                 */
+    QHash<QPoint, bool>::iterator l = list.begin();
+    QPoint rpoint = l.key();
+    while(l != list.end()){
+        l++;
         QPoint pold = original - rpoint;
-        QPoint pnew = original - list.at(i);
+        QPoint pnew = original - l.key();
         if(pnew.manhattanLength() < pold.manhattanLength())
-            rpoint = list.at(i);
+            rpoint = l.key();
     }
     return rpoint;
+    /*              old                 */
+
+
 }
 
-Direction Raster::findLongestPathDir(QList<QPoint> list, QPoint point){
+Direction Raster::findLongestPathDir(QHash<QPoint, bool> list, QPoint point){
     //for(Direction d = (Direction)0; d < directions; d =(Direction)(d+1))
     int counter = 0;
     Direction rdir = UP;
@@ -236,7 +253,7 @@ Direction Raster::findLongestPathDir(QList<QPoint> list, QPoint point){
             newcount++;
             p = this->nextPoint(point, (Direction)i);
         }
-        while(list.indexOf(p) != -1);
+        while(list.value(p, false) != false);
         if(newcount > counter){
             rdir = (Direction)i;
             counter = newcount;
@@ -304,13 +321,13 @@ QList<QString> Raster::isolateRoute(QImage* image){
         if(new_path){
             fstream << "G0 X" <<  step(previous_point.x()) << " Y" << step(previous_point.y()) << "S0" << endl;
             new_path = false;
+            previous_dir = this->findLongestPathDir(laser_points, previous_point);
         }
         else{
-         previous_dir = this->findLongestPathDir(laser_points, previous_point);
         }
-        laser_points.removeOne(previous_point);
+        laser_points.remove(previous_point);
         QPoint next_point = this->nextPoint(previous_point, previous_dir);
-        if(laser_points.indexOf(next_point) == -1){
+        if(laser_points.value(next_point, false) != false){
             fstream << "G1 X" << step(previous_point.x()) << " Y" << step(previous_point.y()) << " S" << this->laser_intensity << endl;
             previous_point =this->findClosest(laser_points, previous_point);
             new_path = true;
