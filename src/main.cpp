@@ -139,10 +139,14 @@ int main(int argc, char *argv[])
        // j->bot_gcode_data = r.rasterRoute(j->bot, 3);
         break;
     case TOP_BOT_SOL:
-        j->top_gcode_data = r.rasterRoute(j->top, 1);
-        j->sol_top_gcode_data = r.rasterRoute(j->sol_top, 2);
-        j->bot_gcode_data = r.rasterRoute(j->bot, 3);
-        j->sol_bot_gcode_data = r.rasterRoute(j->sol_bot, 4);
+        j->top_gcode_data = r.hybridRoute(j->top);
+        j->sol_top_gcode_data = r.hybridRoute(j->sol_top);
+        j->bot_gcode_data = r.hybridRoute(j->bot);
+        j->sol_bot_gcode_data = r.hybridRoute(j->sol_bot);
+      //  j->top_gcode_data = r.rasterRoute(j->top, 1);
+      //  j->sol_top_gcode_data = r.rasterRoute(j->sol_top, 2);
+      //  j->bot_gcode_data = r.rasterRoute(j->bot, 3);
+      //  j->sol_bot_gcode_data = r.rasterRoute(j->sol_bot, 4);
         break;
     }
     load->hide();
