@@ -18,6 +18,7 @@
 #include "frmmain.h"
 #include "general/job.h"
 #include "general/raster.h"
+#include "general/loadingwidget.h"
 
 #include <startingwidget.h>
 
@@ -103,30 +104,39 @@ int main(int argc, char *argv[])
     int isacc = sw.exec();
 
     Raster r(j, 0.0508, CONSTANT_LASER_POWER_MODE, j->power, j->speed);
+
     /*
     QFile filea("top_before.png");
     filea.open(QIODevice::WriteOnly);
     j->top->save(&filea, "PNG");
     filea.close();
-    j->top = r.refineImage(j->top, 2);
+    j->top = r.outboundEdges(j->top, 2).second;
     QFile fileb("top_after.png");
     fileb.open(QIODevice::WriteOnly);
     j->top->save(&fileb, "PNG");
     fileb.close();
     */
 
+    LoadingWidget * load = new LoadingWidget;
+    load->show();
     switch(j->job_type){
     case TOP:
-        j->top_gcode_data = r.isolateRoute(j->top);
+        //j->top_gcode_data = r.isolateRoute(j->top);
+        j->top_gcode_data = r.hybridRoute(j->top);
+
         //j->top_gcode_data = r.rasterRoute(j->top, 1);
         break;
     case TOP_SOL:
-        j->top_gcode_data = r.rasterRoute(j->top, 1);
-        j->sol_top_gcode_data = r.rasterRoute(j->sol_top, 2 );
+       j->top_gcode_data = r.isolateRoute(j->top);
+       j->sol_top_gcode_data = r.isolateRoute(j->sol_top);
+      //  j->top_gcode_data = r.rasterRoute(j->top, 1);
+     //   j->sol_top_gcode_data = r.rasterRoute(j->sol_top, 2 );
         break;
     case TOP_BOT:
-        j->top_gcode_data = r.rasterRoute(j->top, 1);
-        j->bot_gcode_data = r.rasterRoute(j->bot, 3);
+        j->top_gcode_data = r.isolateRoute(j->top);
+        j->bot_gcode_data = r.isolateRoute(j->bot);
+       // j->top_gcode_data = r.rasterRoute(j->top, 1);
+       // j->bot_gcode_data = r.rasterRoute(j->bot, 3);
         break;
     case TOP_BOT_SOL:
         j->top_gcode_data = r.rasterRoute(j->top, 1);
@@ -135,6 +145,7 @@ int main(int argc, char *argv[])
         j->sol_bot_gcode_data = r.rasterRoute(j->sol_bot, 4);
         break;
     }
+    load->hide();
     frmMain* w = new frmMain(NULL,j);
         w->hide();
     if(isacc == QDialog::Accepted){

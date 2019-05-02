@@ -22,9 +22,7 @@ BoardSelector1::BoardSelector1(int number, Job * job, QWidget *parent) : QWidget
 }
 
 
-BoardSelector1::~BoardSelector1(){
-    delete this;
-}
+
 
 BoardSelector2::BoardSelector2(int number, Job* job, QWidget *parent) : QWidget(parent)
 {

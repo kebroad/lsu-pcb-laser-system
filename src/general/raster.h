@@ -26,17 +26,22 @@ public:
 
     QList<QString>  isolateRoute(QImage * image);
 
+
+    QList<QString>  hybridRoute(QImage * image);
+
     QImage* refineImage(QImage * image, int pixels);
 
-    QHash<QPoint, bool> createLaserPoints(QImage* image);
+    QList<QPoint> createLaserPoints(QImage* image);
 
-    QPoint findClosest(QHash<QPoint, bool> list, QPoint original);
+    QPoint findClosest(QList<QPoint> list, QPoint original);
 
-    Direction findLongestPathDir(QHash<QPoint, bool> list, QPoint point);
+    QPoint findClosestBinary(QList <QPoint> list, QPoint original);
+
+    QPair<Direction, int> findLongestPathDir(QList<QPoint> list, QPoint point);
 
     QPoint nextPoint(QPoint point, Direction dir);
 
-
+    QPair <QList<QPoint>, QImage*> outboundEdges(QImage * image, int pixels);
 
     int findXMIN(QImage * image);
     int findXMAX(QImage * image);

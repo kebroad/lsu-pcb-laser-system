@@ -73,7 +73,8 @@ SOURCES += main.cpp\
     dialogs/boardsize.cpp \
     startingwidget.cpp \
     dialogs/boardtype.cpp \
-    general/layerselection.cpp
+    general/layerselection.cpp \
+    general/loadingwidget.cpp
 
 HEADERS  += frmmain.h \
     frmsettings.h \
@@ -112,7 +113,8 @@ HEADERS  += frmmain.h \
     dialogs/boardsize.h \
     startingwidget.h \
     dialogs/boardtype.h \
-    general/layerselection.h
+    general/layerselection.h \
+    general/loadingwidget.h
 
 FORMS    += frmmain.ui \
     frmsettings.ui \

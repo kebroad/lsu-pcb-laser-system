@@ -19,7 +19,6 @@ class BoardSelector1 : public QWidget
 public:
     Board1 * board;
     explicit BoardSelector1( int number = 0 ,Job* job = new Job, QWidget *parent = nullptr);
-    ~BoardSelector1();
     QVBoxLayout * layout;
     QGroupBox * top_box;
     QLabel * layer;
