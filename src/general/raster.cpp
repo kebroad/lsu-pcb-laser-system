@@ -22,7 +22,8 @@ bool Raster::isWhite(QRgb o){
 }
 
 
-int Raster::findXMIN(QImage * image){
+int Raster::findXMIN(QImage * image)
+{
     int min = image->width()-1;
     for(int i = 0; i < image->height(); i++){
         QRgb *line = (QRgb*) image->scanLine(i);

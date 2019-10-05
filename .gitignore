@@ -56,3 +56,6 @@ bin/*
 
 # Autosaves
 *.autosave
+
+#Code Editor Settings
+,vscode
