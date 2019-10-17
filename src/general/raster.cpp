@@ -1,29 +1,58 @@
 #include "raster.h"
 
 #include <iostream>
+
+
+
 Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int speed)
 {
+    /*********************************************
+    Info: Creates the raster object.
+    Inputs:
+    Job: the job throughout the program run
+    stp: the smallest unit "step" transcribed from DPI (dots per inch). This is the real life length of ONE pixel on the input image
+    l_mode: see https://github.com/gnea/grbl/wiki/Grbl-v1.1-Laser-Mode
+    laser intensity: when the laser is on, the grbl "S" value of the laser
+    speed: the speed the head moves at
+    *********************************************/
+
     this->job = j;
     this->step_amt = stp;
     this->laser_mode = l_mode;
     this->laser_intensity = laser_intensity;
-
     this->speed = speed;
 
 }
 
 double Raster::step(int x){
+    /*********************************************
+    Info: Converts the number of pixels in the image (x) to the actual distance. by multiplying by Raster object's step_amt
+    Inputs:
+    x: number of pixels
+    *********************************************/
     return this->step_amt * x;
 }
 
 
 bool Raster::isWhite(QRgb o){
+    /*********************************************
+    Info: Checks to see if the individual pixel is white (white = not exposed by laser).
+          Ideally each input image should be a monochrome bitmap, but from what I've seen
+          the Eagle CAM image addon will always make white the background even if monochrome isnt picked.
+    Inputs:
+    o: single pixel
+    *********************************************/
     return (qRed(o) == 255) && (qBlue(o) == 255) && (qGreen(o) == 255);
 }
 
 
-int Raster::findXMIN(QImage * image)
-{
+
+int Raster::findXMIN(QImage * image){
+    /*********************************************
+    Info: finds the minimum lasered pixel from the bottom so it doesnt have to raster scan the whole plane of the QImage
+    Inputs:
+    image: image of the board plane
+    *********************************************/
     int min = image->width()-1;
     for(int i = 0; i < image->height(); i++)
     {
@@ -35,8 +64,13 @@ int Raster::findXMIN(QImage * image)
     return min;
 }
 
-int Raster::findXMAX(QImage * image)
-{
+
+int Raster::findXMAX(QImage * image){
+    /*********************************************
+    Info: finds the maximum lasered pixel from the top so it doesnt have to raster scan the whole plane of the QImage
+    Inputs:
+    image: image of the board plane
+    *********************************************/
     int max = 0;
     for(int i = 0; i < image->height(); i++)
     {
@@ -48,8 +82,12 @@ int Raster::findXMAX(QImage * image)
     return max;
 }
 
-int Raster::findYMIN(QImage * image)
-{
+int Raster::findYMIN(QImage * image){
+    /*********************************************
+    Info: finds the minimum lasered pixel from the bottom so it doesnt have to raster scan the whole plane of the QImage
+    Inputs:
+    image: image of the board plane
+    *********************************************/
     int min = image->height() -1;
     for(int i = 0; i < image->height(); i++)
     {
@@ -61,8 +99,13 @@ int Raster::findYMIN(QImage * image)
     return min;
 }
 
-int Raster::findYMAX(QImage * image)
-{
+
+int Raster::findYMAX(QImage * image){
+    /*********************************************
+    Info: finds the maximum lasered pixel from the top so it doesnt have to raster scan the whole plane of the QImage
+    Inputs:
+    image: image of the board plane
+    *********************************************/
     int max = 0;
     for(int i = 0; i < image->height(); i++)
     {
@@ -75,7 +118,14 @@ int Raster::findYMAX(QImage * image)
 }
 
 
-QList<QString> Raster::rasterRoute(QImage* image, int jt){
+QList<QString> Raster::rasterRoute(QImage* image){
+    /*********************************************
+    Info: The first and most primitive routing algorithm... literally goes from side to side scanning and turning on the laser for the areas that need it
+    Inputs:
+    image: image of the board plane
+    Outputs:
+    String List: list of individual lines of gcode
+    *********************************************/
     *image = image->mirrored(false,true);
     int xmin = this->findXMIN(image);
     int xmax = this->findXMAX(image);
@@ -173,6 +223,15 @@ QList<QString> Raster::rasterRoute(QImage* image, int jt){
 QMap<QPoint, bool> list;
 
 QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels){
+    /*********************************************
+    Info: takes away all lasered pixels bordering non-lasered pixels, and returns those pixels in a list along with the refined image
+    Inputs:
+    image: image of the board plane
+    pixels: how many bordering pixels DEEP to take out
+    Outputs:
+    QPoint List: list of all the removed border-edge pixels removed
+    QImage: the new refined image
+    *********************************************/
     QList <QPoint> list;
     QImage * refined_image = new QImage(*image);
 
@@ -214,6 +273,15 @@ QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
 }
 
 QImage* Raster::refineImage(QImage * image, int pixels){
+    /*********************************************
+    Info: a primitive version of outbound edges. basically does the same thing with the image but doesnt return the lasered pixels removed
+    Inputs:
+    image: image of the board plane
+    pixels: how many bordering pixels DEEP to take out
+    Outputs:
+    QPoint List: list of all the removed border-edge pixels removed
+    QImage: the new refined image
+    *********************************************/
     QImage * refined_image = new QImage(*image);
     for(int i = 0; i < image->height(); i++){
         for (int j = 0; j < image->width(); j++) {
@@ -274,6 +342,14 @@ QList <QPoint> Raster::createLaserPoints(QImage* image){
 
 
 QPoint Raster::findClosestBinary(QList <QPoint> list, QPoint original){
+    /*********************************************
+    Info: In a list of points, finds and returns the closest point from the original, using binary search (catch me on leetcode, yo)
+    Inputs:
+    list: list of points to find the closest one
+    Original: the one we are trying to find the closest to
+    Outputs:
+    QPoint: the closes point to "original"
+    *********************************************/
     if(list.size() == 1){
         return list.at(0);
     }
@@ -303,6 +379,14 @@ QPoint Raster::findClosestBinary(QList <QPoint> list, QPoint original){
 
 
 QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
+    /*********************************************
+    Info: In a list of points, finds and returns the closest point from the original, using O(n) :( . Obolete because of the binary one
+    Inputs:
+    list: list of points to find the closest one
+    Original: the one we are trying to find the closest to
+    Outputs:
+    QPoint: the closes point to "original"
+    *********************************************/
     if(list.isEmpty())
         return QPoint(-1,-1);
     for(int i = 0; i < 8; i++){ //check points around to make it faster
@@ -338,6 +422,14 @@ QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
 
 
 QPair<Direction, int> Raster::findLongestPathDir(QList<QPoint> list, QPoint point){
+    /*********************************************
+    Info: Given a point and a list of other points, finds the longest path of points in any direction, and the length of that path
+    Inputs:
+    list: list of points to find longest path from "point"
+    point: point where we are trying to find the longest path
+    Outputs:
+    QPoint: the closes point to "original"
+    *********************************************/
 
     //for(Direction d = (Direction)0; d < directions; d =(Direction)(d+1))
 
@@ -450,6 +542,14 @@ QList<QString> Raster::isolateRoute(QImage* image){
 }
 
 QList<QString>  Raster::hybridRoute(QImage * image){
+    /*********************************************
+    Info: hybrid between rasterRoute and isolateRoute.
+            Basically takes away bordering pixels for isolate route (clean edges), and then does the scanning thing for all interior pixels
+    Inputs:
+    image: image of the board plane
+    Outputs:
+    String List: list of individual lines of gcode
+    *********************************************/
     *image = image->mirrored(false,true);
 
     QString temp;
