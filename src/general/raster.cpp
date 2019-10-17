@@ -46,6 +46,7 @@ bool Raster::isWhite(QRgb o){
 }
 
 
+
 int Raster::findXMIN(QImage * image){
     /*********************************************
     Info: finds the minimum lasered pixel from the bottom so it doesnt have to raster scan the whole plane of the QImage
@@ -53,7 +54,8 @@ int Raster::findXMIN(QImage * image){
     image: image of the board plane
     *********************************************/
     int min = image->width()-1;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && j < min )
@@ -62,6 +64,7 @@ int Raster::findXMIN(QImage * image){
     return min;
 }
 
+
 int Raster::findXMAX(QImage * image){
     /*********************************************
     Info: finds the maximum lasered pixel from the top so it doesnt have to raster scan the whole plane of the QImage
@@ -69,7 +72,8 @@ int Raster::findXMAX(QImage * image){
     image: image of the board plane
     *********************************************/
     int max = 0;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && j > max )
@@ -85,7 +89,8 @@ int Raster::findYMIN(QImage * image){
     image: image of the board plane
     *********************************************/
     int min = image->height() -1;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && i < min )
@@ -94,6 +99,7 @@ int Raster::findYMIN(QImage * image){
     return min;
 }
 
+
 int Raster::findYMAX(QImage * image){
     /*********************************************
     Info: finds the maximum lasered pixel from the top so it doesnt have to raster scan the whole plane of the QImage
@@ -101,7 +107,8 @@ int Raster::findYMAX(QImage * image){
     image: image of the board plane
     *********************************************/
     int max = 0;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && i > max )
