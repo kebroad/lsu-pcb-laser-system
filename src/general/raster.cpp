@@ -111,7 +111,8 @@ int Raster::findYMAX(QImage * image){
 }
 
 
-QList<QString> Raster::rasterRoute(QImage* image){
+QList<QString> Raster::rasterRoute(QImage *image, int jt)
+{
     /*********************************************
     Info: The first and most primitive routing algorithm... literally goes from side to side scanning and turning on the laser for the areas that need it
     Inputs:
