@@ -25,7 +25,8 @@ bool Raster::isWhite(QRgb o){
 int Raster::findXMIN(QImage * image)
 {
     int min = image->width()-1;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && j < min )
@@ -34,9 +35,11 @@ int Raster::findXMIN(QImage * image)
     return min;
 }
 
-int Raster::findXMAX(QImage * image){
+int Raster::findXMAX(QImage * image)
+{
     int max = 0;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && j > max )
@@ -45,9 +48,11 @@ int Raster::findXMAX(QImage * image){
     return max;
 }
 
-int Raster::findYMIN(QImage * image){
+int Raster::findYMIN(QImage * image)
+{
     int min = image->height() -1;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && i < min )
@@ -56,9 +61,11 @@ int Raster::findYMIN(QImage * image){
     return min;
 }
 
-int Raster::findYMAX(QImage * image){
+int Raster::findYMAX(QImage * image)
+{
     int max = 0;
-    for(int i = 0; i < image->height(); i++){
+    for(int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
         for (int j = 0; j < image->width(); j++)
             if((!this->isWhite(line[j])) && i > max )
