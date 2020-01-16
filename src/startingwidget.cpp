@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QDesktopServices>
 #include <QScreen>
+#include <iostream>
 StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 {
 
@@ -15,7 +16,8 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     flags |= Qt::WindowCloseButtonHint;
     setWindowFlags( flags );
 
-   setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
+    std::cout << "About to change icon" << std::endl;
+   //setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
    // this->adjustSize();
     //showMaximized();
     job = j;

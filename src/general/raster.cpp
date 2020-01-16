@@ -144,7 +144,8 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
     if(this->laser_mode == CONSTANT_LASER_POWER_MODE){
             fstream << "M3 S0" << endl;
     }
-    else if (this->laser_mode == DYNAMIC_LASER_POWER_MODE){
+    else if (this->laser_mode == DYNAMIC_LASER_POWER_MODE)
+    {
             fstream << "M4 S0" << endl;
     }
 

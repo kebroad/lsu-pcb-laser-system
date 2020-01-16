@@ -31,6 +31,7 @@ TARGET = "LSU PCB Laser System"
 TEMPLATE = app
 VERSION = 1.0.12
 RC_ICONS += images/LSU_PCB_ICON.ico
+ICON = images/lsu-pcb-laser-system.icns #For macOS Icon compatibility
 
 DEFINES += sNan=\"65536\"
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
