@@ -24,7 +24,8 @@ Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int sp
 
 }
 
-double Raster::step(int x){
+double Raster::step(int x)
+{
     /*********************************************
     Info: Converts the number of pixels in the image (x) to the actual distance. by multiplying by Raster object's step_amt
     Inputs:
@@ -34,7 +35,8 @@ double Raster::step(int x){
 }
 
 
-bool Raster::isWhite(QRgb o){
+bool Raster::isWhite(QRgb o)
+{
     /*********************************************
     Info: Checks to see if the individual pixel is white (white = not exposed by laser).
           Ideally each input image should be a monochrome bitmap, but from what I've seen
@@ -149,32 +151,41 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
             fstream << "M4 S0" << endl;
     }
 
-    for(int i = ymin; i < ymax + 1; i++){
+    for(int i = ymin; i < ymax + 1; i++)
+    {
         int path_origin = 0;
         QRgb *line = (QRgb*) image->scanLine(i);
-        if(i % 2 == 0){ //Odd line #'s, starting with 0, left to right
-            for (int j = xmin ; j < xmax+1; j++) {
-                if(isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
-                else if(isWhite(line[j]) && laser_on_path){ // if currently on a laser on path
+        if (i % 2 == 0)
+        { //Odd line #'s, starting with 0, left to right
+            for (int j = xmin ; j < xmax+1; j++)
+            {
+                if (isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
+                else if (isWhite(line[j]) && laser_on_path)
+                { // if currently on a laser on path
                         fstream << "G1 X" << step(j-1) << " S" << this->laser_intensity << endl;
                         laser_on_path = false; laser_off_path = true;
                 }
-                else if (isWhite(line[j]) && !laser_off_path && !laser_on_path){    // neither; start a laser on or a laser off path
+                else if (isWhite(line[j]) && !laser_off_path && !laser_on_path)
+                {    // neither; start a laser on or a laser off path
                         laser_off_path = true; laser_on_path = false;
                 }
-                else if(!isWhite(line[j]) && laser_on_path) continue;
-                else if(!isWhite(line[j]) && laser_off_path){    //if currently on a laser off path
+                else if (!isWhite(line[j]) && laser_on_path) continue;
+                else if (!isWhite(line[j]) && laser_off_path)
+                {    //if currently on a laser off path
                         fstream << "G0 X" << step(j-1) << " S0" << endl;
                         laser_off_path = false; laser_on_path = true;
                 }
-                else if(!isWhite(line[j]) && !laser_on_path && !laser_off_path){
+                else if (!isWhite(line[j]) && !laser_on_path && !laser_off_path)
+                {
                         laser_on_path = true; laser_off_path = false;
                 }
             }
-            if(laser_on_path){
+            if (laser_on_path)
+            {
                 fstream << "G1 X" << step(image->width()-1) << " S" << this->laser_intensity << endl;
             }
-            else if(laser_off_path){
+            else if (laser_off_path)
+            {
                 fstream << "G0 X" << step(image->width()-1) << " S0" << endl;
             }
             laser_on_path = false;
@@ -182,29 +193,40 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
             fstream << "G0 Y" << step(i+1) << " S0" << endl;
 
         }
-        else{
-            for(int j = xmax+1; j > xmin; j--){
-                if(isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
-                else if(isWhite(line[j]) && laser_on_path){ // if currently on a laser on path
+        else
+        {
+            for (int j = xmax+1; j > xmin; j--)
+            {
+                if (isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
+                else if (isWhite(line[j]) && laser_on_path)
+                { // if currently on a laser on path
                         fstream << "G1 X" << step(j+1) << " S" << this->laser_intensity << endl;
                         laser_on_path = false; laser_off_path = true;
                 }
-                else if (isWhite(line[j]) && !laser_off_path && !laser_on_path){    // neither; start a laser on or a laser off path
+                else if (isWhite(line[j]) && !laser_off_path && !laser_on_path)
+                {    // neither; start a laser on or a laser off path
                         laser_off_path = true; laser_on_path = false;
                 }
-                else if(!isWhite(line[j]) && laser_on_path) continue;
-                else if(!isWhite(line[j]) && laser_off_path){    //if currently on a laser off path
+                else if (!isWhite(line[j]) && laser_on_path)
+                {
+                    continue;
+                }
+                else if (!isWhite(line[j]) && laser_off_path)
+                {    //if currently on a laser off path
                         fstream << "G0 X" << step(j+1) << " S0" << endl;
                         laser_off_path = false; laser_on_path = true;
                 }
-                else if(!isWhite(line[j]) && !laser_on_path && !laser_off_path){
+                else if(!isWhite(line[j]) && !laser_on_path && !laser_off_path)
+                {
                         laser_on_path = true; laser_off_path = false;
                 }
             }
-            if(laser_on_path){
+            if(laser_on_path)
+            {
                 fstream << "G1 X0 S" << this->laser_intensity << endl;
             }
-            else if(laser_off_path){
+            else if(laser_off_path)
+            {
                 fstream << "G0 X0 S0" << endl;
             }
             laser_on_path = false;
@@ -224,7 +246,8 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
 
 QMap<QPoint, bool> list;
 
-QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels){
+QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
+{
     /*********************************************
     Info: takes away all lasered pixels bordering non-lasered pixels, and returns those pixels in a list along with the refined image
     Inputs:
@@ -237,9 +260,12 @@ QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
     QList <QPoint> list;
     QImage * refined_image = new QImage(*image);
 
-    for(int i = 0; i < image->height(); i++){
-        for (int j = 0; j < image->width(); j++) {
-            if(!this->isWhite(image->pixel(j,i))){
+    for (int i = 0; i < image->height(); i++)
+    {
+        for (int j = 0; j < image->width(); j++)
+        {
+            if (!this->isWhite(image->pixel(j,i)))
+            {
                 int p = 1;
                 //for(int p = 1; p < pixels; p++){
                     /*
@@ -252,12 +278,12 @@ QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
                     || this->isWhite(image->pixel(nextPoint(QPoint(j,i), DOWN_LEFT)))
                     || this->isWhite(image->pixel(nextPoint(QPoint(j,i), DOWN_RIGHT)))
                     */
-                    if(this->isWhite(image->pixel(j+p,i))
+                    if (this->isWhite(image->pixel(j+p,i))
                     || this->isWhite(image->pixel(j-p, i))
                     || this->isWhite(image->pixel(j, i+p))
                     || this->isWhite(image->pixel(j, i-p))
-                    ){
-
+                    )
+                    {
                         list.append(QPoint(j,i));
                     }
                 //}
@@ -265,7 +291,8 @@ QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
             }
         }
     }
-    for(int i = 0; i < list.size(); i++){
+    for(int i = 0; i < list.size(); i++)
+    {
         refined_image->setPixelColor(list.at(i), QColor(255,255,255));
     }
     QPair <QList <QPoint>, QImage*> rvalue;
@@ -274,7 +301,8 @@ QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
     return rvalue;
 }
 
-QImage* Raster::refineImage(QImage * image, int pixels){
+QImage* Raster::refineImage(QImage * image, int pixels)
+{
     /*********************************************
     Info: a primitive version of outbound edges. basically does the same thing with the image but doesnt return the lasered pixels removed
     Inputs:
@@ -285,16 +313,20 @@ QImage* Raster::refineImage(QImage * image, int pixels){
     QImage: the new refined image
     *********************************************/
     QImage * refined_image = new QImage(*image);
-    for(int i = 0; i < image->height(); i++){
-        for (int j = 0; j < image->width(); j++) {
-            if(!this->isWhite(image->pixel(j,i))){
-                for(int p = 1; p < pixels; p++){
+    for(int i = 0; i < image->height(); i++)
+    {
+        for (int j = 0; j < image->width(); j++)
+        {
+            if(!this->isWhite(image->pixel(j,i)))
+            {
+                for(int p = 1; p < pixels; p++)
+                {
                     if(this->isWhite(image->pixel(j+p,i))
                     || this->isWhite(image->pixel(j-p, i))
                     || this->isWhite(image->pixel(j, i+p))
                     || this->isWhite(image->pixel(j, i-p))
-                    ){
-
+                    )
+                    {
                         refined_image->setPixelColor(j, i, QColor(255,255,255));
                     }
                 }
@@ -307,7 +339,8 @@ QImage* Raster::refineImage(QImage * image, int pixels){
     return refined_image;
 }
 
-bool isWhite(QColor c){
+bool isWhite(QColor c)
+{
         return (c == Qt::white);
 }
 inline uint qHash (const QPoint & key)
@@ -321,18 +354,25 @@ bool variantLessThan(const QPoint &v1, const QPoint &v2)
     return v1.manhattanLength() < v2.manhattanLength();
 }
 
-QList <QPoint> Raster::createLaserPoints(QImage* image){
+QList <QPoint> Raster::createLaserPoints(QImage* image)
+{
     QHash <QPoint, bool> yot;
 
     QList<QPoint> points;
-    for(int i = 0; i < image->height(); i++){
+    for (int i = 0; i < image->height(); i++)
+    {
         QRgb *line = (QRgb*) image->scanLine(i);
-        for(int j = 0; j < image->width(); j++){
-            if(!isWhite(line[j])){
+        for (int j = 0; j < image->width(); j++)
+        {
+            if (!isWhite(line[j]))
+            {
                 points.append(QPoint(j,i));
                 yot.insert(QPoint(j,i), true);
-                    if(yot.value(QPoint(j,i), false) == true)
+
+                    if (yot.value(QPoint(j,i), false) == true)
+                    {
                         yot.remove(QPoint(j,i));
+                    }
             }
         }
 
@@ -423,7 +463,8 @@ QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
 
 
 
-QPair<Direction, int> Raster::findLongestPathDir(QList<QPoint> list, QPoint point){
+QPair<Direction, int> Raster::findLongestPathDir(QList<QPoint> list, QPoint point)
+{
     /*********************************************
     Info: Given a point and a list of other points, finds the longest path of points in any direction, and the length of that path
     Inputs:
@@ -437,17 +478,20 @@ QPair<Direction, int> Raster::findLongestPathDir(QList<QPoint> list, QPoint poin
 
     int counter = 0;
     Direction rdir = UP;
-    for(int i = 0; i < 8; i++){
+    for(int i = 0; i < 8; i++)
+    {
         int newcount = -1;
         QPoint p = point;
-        do{
+        do
+        {
             newcount++;
             p = this->nextPoint(p, (Direction)i);
         }
 
-        while(list.contains(p) != false);
+        while (list.contains(p) != false);
 
-        if(newcount > counter){
+        if(newcount > counter)
+        {
             rdir = (Direction)i;
             counter = newcount;
         }
@@ -460,8 +504,10 @@ QPair<Direction, int> Raster::findLongestPathDir(QList<QPoint> list, QPoint poin
 
 
 
-QPoint Raster::nextPoint(QPoint point, Direction dir){
-    switch(dir){
+QPoint Raster::nextPoint(QPoint point, Direction dir)
+{
+    switch(dir)
+    {
     case UP:
         return QPoint(point.x(), point.y()+1);
         break;
@@ -501,10 +547,12 @@ QList<QString> Raster::isolateRoute(QImage* image){
     fstream << "G90" << endl;
     fstream << "F" << this->speed << endl;
     fstream << "G0 X0 Y0 Z0" << endl;
-    if(this->laser_mode == CONSTANT_LASER_POWER_MODE){
+    if(this->laser_mode == CONSTANT_LASER_POWER_MODE)
+    {
             fstream << "M3 S0" << endl;
     }
-    else if (this->laser_mode == DYNAMIC_LASER_POWER_MODE){
+    else if (this->laser_mode == DYNAMIC_LASER_POWER_MODE)
+    {
             fstream << "M4 S0" << endl;
     }
 
@@ -512,7 +560,8 @@ QList<QString> Raster::isolateRoute(QImage* image){
     Direction previous_dir;
     int previous_pathlen;
 
-   do{
+    do
+    {
         fstream << "G0 X" <<  step(previous_point.x()) << " Y" << step(previous_point.y()) << "S0" << endl;
 
         QPair<Direction, int> tmp = this->findLongestPathDir(laser_points, previous_point);

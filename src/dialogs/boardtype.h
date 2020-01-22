@@ -24,17 +24,19 @@ public:
     QHBoxLayout * speed_layout;
     QHBoxLayout * power_layout;
     QHBoxLayout * invert_layout;
+    QHBoxLayout * non_invert_layout;
     QHBoxLayout * dpi_layout;
 
     QLabel * speed_label;
     QLabel * power_label;
     QLabel * invert_label;
+    QLabel * non_invert_label;
     QLabel * dpi_label;
     QLineEdit* dpi;
     QLineEdit* speed;
     QLineEdit* power;
     QRadioButton * invert;
-
+    QRadioButton * non_invert;
 
     QRadioButton* mask;
     QRadioButton* top;
@@ -45,43 +47,46 @@ public:
 signals:
 
 public slots:
-    void set_mask(bool checked){
+    void set_mask(bool checked)
+    {
         if(true){
             power->setText("650");
             speed->setText("1000");
-            invert->setChecked(false);
             dpi->setText("500");
         }
     }
-    void set_top(bool checked){
-        if(true){
+    void set_top(bool checked)
+    {
+        if(true)
+        {
             power->setText("135");
             speed->setText("750");
-            invert->setChecked(true);
             dpi->setText("500");
         }
     }
-    void set_top_sol(bool checked){
+    void set_top_sol(bool checked)
+    {
         if(true){
             power->setText("135");
             speed->setText("750");
-            invert->setChecked(true);
             dpi->setText("500");
         }
     }
-    void set_top_bot(bool checked){
-        if(true){
+    void set_top_bot(bool checked)
+    {
+        if(true)
+        {
             power->setText("135");
             speed->setText("750");
-            invert->setChecked(true);
             dpi->setText("500");
         }
     }
-    void set_top_bot_sol(bool checked){
-        if(true){
+    void set_top_bot_sol(bool checked)
+    {
+        if(true)
+        {
             power->setText("135");
             speed->setText("750");
-            invert->setChecked(true);
         }
     }
 };
