@@ -86,7 +86,9 @@ public:
     QImage publishLayoutBot();
     QImage publishLayoutSolTop();
     QImage publishLayoutSolBot();
+
     QTabWidget * layers;
+
     QGraphicsView * top_view;
     QGraphicsView * sol_top_view;
     QGraphicsView * bot_view;

@@ -70,19 +70,18 @@ public slots:
                 }
                 break;
             case 1:
-                if(this->s->sizeopt1->isChecked()){
+                if(this->s->sizeopt1->isChecked())
+                {
                         w->setCurrentIndex(2);
                         this->job->graphInit();
                 }
-                else if(this->s->sizeopt2->isChecked()){
+                else if(this->s->sizeopt2->isChecked())
+                {
                         w->setCurrentIndex(2);
                         this->job->graphInit();
                 }
-                else if(this->s->sizeopt3->isChecked()){
-                        w->setCurrentIndex(2);
-                        this->job->graphInit();
-                }
-                else if(this->s->sizecust->isChecked()){
+                else if(this->s->sizecust->isChecked())
+                {
                     job->height =  this->s->toDPI(this->s->height->text().toDouble());
                     job->width =  this->s->toDPI(this->s->width->text().toDouble());
                     this->job->graphInit();
@@ -90,9 +89,9 @@ public slots:
 
                     w->insertWidget(2,l);
                     w->setCurrentIndex(2);
-
                 }
-                else{
+                else
+                {
                     QMessageBox::warning(this, "Warning", "Please Select a board size before continuing!");
                 }
                 break;
@@ -104,9 +103,6 @@ public slots:
                     this->l->publishBoard();
                     accept();
                 }
-
-
-
         }
     }
     void go_previous(){

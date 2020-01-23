@@ -30,11 +30,11 @@ public:
     QHBoxLayout * custom;
     QLabel * logo;
     QLabel * description;
-    QRadioButton* sizeopt1;
 
+    QRadioButton* sizeopt1;
     QRadioButton* sizeopt2;
-    QRadioButton* sizeopt3;
     QRadioButton* sizecust;
+
     QLineEdit* height;
     QLineEdit* width;
     QLabel * heightu;
@@ -43,22 +43,26 @@ public:
 signals:
 
 public slots:
-    void accept(){
-        if(this->sizeopt1->isChecked()){
-
+    void accept()
+    {
+        if(this->sizeopt1->isChecked())
+        {
+            job->height = 4;
+            job->width = 6;
         }
-        else if(this->sizeopt2->isChecked()){
-
+        else if(this->sizeopt2->isChecked())
+        {
+            job->height = 9;
+            job->width = 12;
         }
-        else if(this->sizeopt3->isChecked()){
-
-        }
-        else if(this->sizecust->isChecked()){
+        else if(this->sizecust->isChecked())
+        {
             job->height =  this->height->text().toInt();
             job->width =  this->width->text().toInt();
             this->close();
         }
-        else{
+        else
+        {
             QMessageBox::warning(this, "Warning", "Please Select a size before continuing");
         }
     }

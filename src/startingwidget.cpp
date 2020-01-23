@@ -1,32 +1,28 @@
 #include "startingwidget.h"
 #include <QApplication>
 #include <QDesktopServices>
+#include <QStyle>
+#include <QDesktopWidget>
 #include <QScreen>
 #include <iostream>
 StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 {
-
-
-
     Qt::WindowFlags flags = 0;
 
     flags |= Qt::WindowMinMaxButtonsHint;
-
-
     flags |= Qt::WindowCloseButtonHint;
+
     setWindowFlags( flags );
 
     std::cout << "About to change icon" << std::endl;
-   //setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
-   // this->adjustSize();
+    setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
+    //this->adjustSize();
     //showMaximized();
     job = j;
     w = new QStackedWidget;
 
     main_layout = new QVBoxLayout(this);
     button_layout = new QHBoxLayout;
-
-
 
 
     t = new BoardType;
@@ -36,7 +32,7 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     w->setCurrentIndex(0);
     w->insertWidget(0, t);
     w->insertWidget(1, s);
-   // w->insertWidget(2,l);
+    //w->insertWidget(2,l);
 
     main_layout->addWidget(w);
 
