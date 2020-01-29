@@ -45,7 +45,8 @@ bool Raster::isWhite(QRgb o)
 
 
 
-int Raster::findXMIN(QImage * image){
+int Raster::findXMIN(QImage * image)
+{
     /*********************************************
     Info: finds the minimum lasered pixel from the bottom so it doesnt have to raster scan the whole plane of the QImage
     Inputs:
@@ -244,6 +245,7 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
                         laser_on_path = true; laser_off_path = false;
                 }
             }
+
             if(laser_on_path)
             {
                 fstream << "G1 X0 S" << this->laser_intensity << endl;
