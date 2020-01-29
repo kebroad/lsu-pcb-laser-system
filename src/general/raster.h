@@ -4,11 +4,26 @@
 #include <QFile>
 #include <QImage>
 #include <QTextStream>
+#include <iostream>
 #include "job.h"
 
-enum Direction {UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT};
+enum Direction
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    UP_LEFT,
+    UP_RIGHT,
+    DOWN_LEFT,
+    DOWN_RIGHT
+};
 
-enum LaserMode {CONSTANT_LASER_POWER_MODE, DYNAMIC_LASER_POWER_MODE};
+enum LaserMode
+{
+    CONSTANT_LASER_POWER_MODE,
+    DYNAMIC_LASER_POWER_MODE
+};
 
 class Raster
 {
@@ -23,9 +38,7 @@ public:
 
     QList<QString>  rasterRoute(QImage* image, int jt = 1);
 
-
     QList<QString>  isolateRoute(QImage * image);
-
 
     QList<QString>  hybridRoute(QImage * image);
 

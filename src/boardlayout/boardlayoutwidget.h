@@ -1,6 +1,7 @@
 #ifndef BOARDLAYOUTWIDGET_H
 #define BOARDLAYOUTWIDGET_H
 
+#include <QAbstractScrollArea>
 #include <QObject>
 #include <QDialog>
 #include <QWidget>
