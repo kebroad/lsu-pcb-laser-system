@@ -407,7 +407,8 @@ QList <QPoint> Raster::createLaserPoints(QImage* image)
 
 
 
-QPoint Raster::findClosestBinary(QList <QPoint> list, QPoint original){
+QPoint Raster::findClosestBinary(QList <QPoint> list, QPoint original)
+{
     /*********************************************
     Info: In a list of points, finds and returns the closest point from the original, using binary search (catch me on leetcode, yo)
     Inputs:
@@ -456,7 +457,8 @@ QPoint Raster::findClosestBinary(QList <QPoint> list, QPoint original){
 
 
 
-QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
+QPoint Raster::findClosest(QList<QPoint> list, QPoint original)
+{
     /*********************************************
     Info: In a list of points, finds and returns the closest point from the original, using O(n) :( . Obolete because of the binary one
     Inputs:
@@ -479,10 +481,7 @@ QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
         }
     }
 
-
-
     /*              old                 */
-
     QPoint rpoint = list.at(0);
 
     for (int i = 0 ; i < list.size(); i++)
@@ -495,15 +494,10 @@ QPoint Raster::findClosest(QList<QPoint> list, QPoint original){
             rpoint = list.at(i);
         }
     }
-
-
     //return findClosestBinary(list, original);
-
     return rpoint;
 
     /*              old                 */
-
-
 }
 
 
