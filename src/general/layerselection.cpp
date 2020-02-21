@@ -10,7 +10,8 @@ LayerSelection::LayerSelection(QWidget *parent, Job * j) : QWidget(parent)
 
     main_layout->addWidget(top);
 
-    switch(j->job_type){
+    switch (j->job_type)
+    {
         case TOP_SOL:
             main_layout->addWidget(top_sol);
         break;

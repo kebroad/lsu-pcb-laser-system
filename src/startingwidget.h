@@ -32,7 +32,8 @@ signals:
 
 public slots:
     void go_next(){
-        switch (w->currentIndex()){
+        switch (w->currentIndex())
+        {
             case 0:
                 job->speed = this->t->speed->text().toInt();
                 job->power = this->t->power->text().toInt();
@@ -40,42 +41,48 @@ public slots:
                 job->dpi = this->t->dpi->text().toInt();
                 this->s = new BoardSize(NULL, this->job);
                 w->insertWidget(1,s);
-                if(this->t->top->isChecked()){
+                if(this->t->top->isChecked())
+                {
                     job->job_type = TOP;
                     w->setCurrentIndex(1);
                     previous->show();
                 }
-                else if(this->t->top_sol->isChecked()){
+                else if(this->t->top_sol->isChecked())
+                {
                     job->job_type = TOP_SOL;
                     w->setCurrentIndex(1);
                     previous->show();
                 }
-                else if(this->t->top_bot->isChecked()){
+                else if(this->t->top_bot->isChecked())
+                {
                     job->job_type = TOP_BOT;
                     w->setCurrentIndex(1);
                     previous->show();
                 }
-                else if(this->t->top_bot_sol->isChecked()){
+                else if(this->t->top_bot_sol->isChecked())
+                {
                     job->job_type = TOP_BOT_SOL;
                     w->setCurrentIndex(1);
                     previous->show();
                 }
-                else if(this->t->mask->isChecked()){
+                else if(this->t->mask->isChecked())
+                {
                     job->job_type = TOP;
                     w->setCurrentIndex(1);
                     previous->show();
                 }
-                else{
+                else
+                {
                     QMessageBox::warning(this, "Warning", "Please Select a board type before continuing!");
                 }
                 break;
             case 1:
-                if(this->s->sizeopt1->isChecked())
+                if (this->s->sizeopt1->isChecked())
                 {
                         w->setCurrentIndex(2);
                         this->job->graphInit();
                 }
-                else if(this->s->sizeopt2->isChecked())
+                else if (this->s->sizeopt2->isChecked())
                 {
                         w->setCurrentIndex(2);
                         this->job->graphInit();
@@ -97,7 +104,7 @@ public slots:
                 break;
             case 2:
                 QMessageBox::StandardButton reply;
-                reply = QMessageBox::question(this, "Warning", "Routing will start. Continue?",
+                reply = QMessageBox::question(this, "Warning", "Routing will start and the Candle app will now open. Continue?",
                                             QMessageBox::Yes|QMessageBox::No);
                 if (reply == QMessageBox::Yes) {
                     this->l->publishBoard();
@@ -105,8 +112,10 @@ public slots:
                 }
         }
     }
-    void go_previous(){
-        switch(this->w->currentIndex()){
+    void go_previous()
+    {
+        switch(this->w->currentIndex())
+        {
         case 1:
             previous->hide();
             w->setCurrentIndex(0);

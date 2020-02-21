@@ -128,7 +128,7 @@ int Raster::findYMAX(QImage * image)
 
         for (int j = 0; j < image->width(); j++)
         {
-            if((!this->isWhite(line[j])) && i > max )
+            if ((!this->isWhite(line[j])) && i > max )
             {
                 max = i;
             }
@@ -161,10 +161,10 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
 
     bool laser_off_path = false;
     bool laser_on_path = false;
-    fstream << "G90" << endl;
-    fstream << "F" << this->speed << endl;
-    fstream << "G0 X0 Y0 Z0" << endl;
-    if(this->laser_mode == CONSTANT_LASER_POWER_MODE)
+    fstream << "G90" << endl; // Set absolute coordinates
+    fstream << "F" << this->speed << endl; // Set Speed
+    fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
+    if (this->laser_mode == CONSTANT_LASER_POWER_MODE)
     {
             fstream << "M3 S0" << endl;
     }
@@ -180,7 +180,8 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
         { //Odd line #'s, starting with 0, left to right
             for (int j = xmin ; j < xmax+1; j++)
             {
-                if (isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
+                if (isWhite(line[j]) && laser_off_path)
+                    continue;           //continue, nothing to see here
                 else if (isWhite(line[j]) && laser_on_path)
                 { // if currently on a laser on path
                         fstream << "G1 X" << step(j-1) << " S" << this->laser_intensity << endl;
@@ -221,7 +222,8 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
         {
             for (int j = xmax+1; j > xmin; j--)
             {
-                if (isWhite(line[j]) && laser_off_path) continue;           //continue, nothing to see here
+                if (isWhite(line[j]) && laser_off_path)
+                    continue;           //continue, nothing to see here
                 else if (isWhite(line[j]) && laser_on_path)
                 { // if currently on a laser on path
                         fstream << "G1 X" << step(j+1) << " S" << this->laser_intensity << endl;
@@ -338,19 +340,18 @@ QImage* Raster::refineImage(QImage * image, int pixels)
     QImage: the new refined image
     *********************************************/
     QImage * refined_image = new QImage(*image);
-    for(int i = 0; i < image->height(); i++)
+    for (int i = 0; i < image->height(); i++)
     {
         for (int j = 0; j < image->width(); j++)
         {
-            if(!this->isWhite(image->pixel(j,i)))
+            if (!this->isWhite(image->pixel(j,i)))
             {
-                for(int p = 1; p < pixels; p++)
+                for (int p = 1; p < pixels; p++)
                 {
-                    if(this->isWhite(image->pixel(j+p,i))
+                    if (this->isWhite(image->pixel(j+p,i))
                     || this->isWhite(image->pixel(j-p, i))
                     || this->isWhite(image->pixel(j, i+p))
-                    || this->isWhite(image->pixel(j, i-p))
-                    )
+                    || this->isWhite(image->pixel(j, i-p)))
                     {
                         refined_image->setPixelColor(j, i, QColor(255,255,255));
                     }
@@ -576,7 +577,8 @@ QPoint Raster::nextPoint(QPoint point, Direction dir)
 }
 
 
-QList<QString> Raster::isolateRoute(QImage* image){
+QList<QString> Raster::isolateRoute(QImage* image)
+{
     *image = image->mirrored(false,true);
 
     QString temp;
@@ -639,7 +641,8 @@ QList<QString> Raster::isolateRoute(QImage* image){
     return data;
 }
 
-QList<QString>  Raster::hybridRoute(QImage * image){
+QList<QString>  Raster::hybridRoute(QImage * image)
+{
     /*********************************************
     Info: hybrid between rasterRoute and isolateRoute.
             Basically takes away bordering pixels for isolate route (clean edges), and then does the scanning thing for all interior pixels
@@ -658,9 +661,9 @@ QList<QString>  Raster::hybridRoute(QImage * image){
 
     QList <QPoint> laser_points = pair.first;
 
-    fstream << "G90" << endl;
-    fstream << "F" << this->speed << endl;
-    fstream << "G0 X0 Y0 Z0" << endl;
+    fstream << "G90" << endl; // Use Absolute coordinates
+    fstream << "F" << this->speed << endl; // Set speed
+    fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
     if(this->laser_mode == CONSTANT_LASER_POWER_MODE)
     {
         fstream << "M3 S0" << endl;
@@ -706,8 +709,14 @@ QList<QString>  Raster::hybridRoute(QImage * image){
     fstream << "M5" << endl;
     fstream << "G0 X0 Y0 Z0 S0" << endl;
     fstream.seek(0);
+
     QList<QString> data;
-    while (!fstream.atEnd()) data.append(fstream.readLine());
+
+    while (!fstream.atEnd())
+    {
+        data.append(fstream.readLine());
+    }
+
     fstream.reset();
 
 
