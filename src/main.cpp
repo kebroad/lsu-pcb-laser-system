@@ -102,7 +102,6 @@ int main(int argc, char *argv[])
 
     a.setStyleSheet(a.styleSheet() + "QWidget {font-size: 8pt}");
 
-    int testing_cross;
     Job * j = new Job;
     StartingWidget sw(NULL, j);
     int isacc = sw.exec();
@@ -119,26 +118,23 @@ int main(int argc, char *argv[])
     case TOP_SOL:
        j->top_gcode_data = r.isolateRoute(j->top);
        j->sol_top_gcode_data = r.isolateRoute(j->sol_top);
-
         break;
     case TOP_BOT:
         j->top_gcode_data = r.isolateRoute(j->top);
         j->bot_gcode_data = r.isolateRoute(j->bot);
-
         break;
     case TOP_BOT_SOL:
         j->top_gcode_data = r.hybridRoute(j->top);
         j->sol_top_gcode_data = r.hybridRoute(j->sol_top);
         j->bot_gcode_data = r.hybridRoute(j->bot);
         j->sol_bot_gcode_data = r.hybridRoute(j->sol_bot);
-
         break;
     }
     load->hide();
     frmMain* w = new frmMain(NULL,j);
         w->hide();
-    if(isacc == QDialog::Accepted){
-
+    if (isacc == QDialog::Accepted)
+    {
         w->show();
     }
 

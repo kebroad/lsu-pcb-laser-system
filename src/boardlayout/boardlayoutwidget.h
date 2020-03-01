@@ -11,10 +11,6 @@
 #include "general/job.h"
 #include "boardlayout/boardview.h"
 
-
-
-
-
 class BoardLayoutWidget : public QDialog
 {
     Q_OBJECT
@@ -42,8 +38,6 @@ public:
     QPushButton * remove_board;
     QPushButton * ok;
     Job* job;
-
-
 
 public slots:
     void board_add(){
@@ -104,13 +98,15 @@ public slots:
         job->board_amount--;
     }
     void publishBoard(){
-        switch(job->job_type){
-            case TOP:
-         {       job->top = new QImage(board_view1->publishLayout());
-                break;
-        }
-            case TOP_SOL:
+        switch(job->job_type)
         {
+            case TOP:
+            {
+                job->top = new QImage(board_view1->publishLayout());
+                break;
+            }
+            case TOP_SOL:
+            {
                 job->top = new QImage(board_view2->publishLayoutTop());
                 QFile file1("top.png");
                 file1.open(QIODevice::WriteOnly);
@@ -120,32 +116,32 @@ public slots:
                 file.open(QIODevice::WriteOnly);
                 job->sol_top->save(&file, "PNG");
                 break;
-        }
+            }
             case TOP_BOT:
-        {
+            {
                 job->top = new QImage(board_view3->publishLayoutTop());
                 job->bot = new QImage(board_view3->publishLayoutBot());
 
                 break;
-        }
+            }
             case TOP_BOT_SOL:
-            job->top = new QImage(board_view4->publishLayoutTop());
-            QFile file1("top.png");
-            file1.open(QIODevice::WriteOnly);
-            job->top->save(&file1, "PNG");
-            job->sol_top = new QImage(board_view4->publishLayoutSolTop());
-            QFile file2("sol_top.png");
-            file2.open(QIODevice::WriteOnly);
-            job->sol_top->save(&file2, "PNG");
-            job->bot = new QImage(board_view4->publishLayoutBot());
-            QFile file3("bot.png");
-            file3.open(QIODevice::WriteOnly);
-            job->bot->save(&file3, "PNG");
-            job->sol_bot = new QImage(board_view4->publishLayoutSolBot());
+                job->top = new QImage(board_view4->publishLayoutTop());
+                QFile file1("top.png");
+                file1.open(QIODevice::WriteOnly);
+                job->top->save(&file1, "PNG");
+                job->sol_top = new QImage(board_view4->publishLayoutSolTop());
+                QFile file2("sol_top.png");
+                file2.open(QIODevice::WriteOnly);
+                job->sol_top->save(&file2, "PNG");
+                job->bot = new QImage(board_view4->publishLayoutBot());
+                QFile file3("bot.png");
+                file3.open(QIODevice::WriteOnly);
+                job->bot->save(&file3, "PNG");
+                job->sol_bot = new QImage(board_view4->publishLayoutSolBot());
 
-            QFile file4("sol_bot.png");
-            file4.open(QIODevice::WriteOnly);
-            job->sol_bot->save(&file4, "PNG");
+                QFile file4("sol_bot.png");
+                file4.open(QIODevice::WriteOnly);
+                job->sol_bot->save(&file4, "PNG");
                 break;
         }
     }

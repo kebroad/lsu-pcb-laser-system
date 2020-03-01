@@ -31,7 +31,8 @@ public:
 signals:
 
 public slots:
-    void go_next(){
+    void go_next()
+    {
         switch (w->currentIndex())
         {
             case 0:
@@ -79,15 +80,25 @@ public slots:
             case 1:
                 if (this->s->sizeopt1->isChecked())
                 {
-                        w->setCurrentIndex(2);
-                        this->job->graphInit();
+                    job->height =  this->s->toDPI(4);
+                    job->width =  this->s->toDPI(6);
+                    this->job->graphInit();
+                    this->l = new BoardLayoutWidget(NULL, this->job);
+
+                    w->insertWidget(2,l);
+                    w->setCurrentIndex(2);
                 }
                 else if (this->s->sizeopt2->isChecked())
                 {
-                        w->setCurrentIndex(2);
-                        this->job->graphInit();
+                    job->height =  this->s->toDPI(9);
+                    job->width =  this->s->toDPI(12);
+                    this->job->graphInit();
+                    this->l = new BoardLayoutWidget(NULL, this->job);
+
+                    w->insertWidget(2,l);
+                    w->setCurrentIndex(2);
                 }
-                else if(this->s->sizecust->isChecked())
+                else if (this->s->sizecust->isChecked())
                 {
                     job->height =  this->s->toDPI(this->s->height->text().toDouble());
                     job->width =  this->s->toDPI(this->s->width->text().toDouble());
@@ -106,7 +117,8 @@ public slots:
                 QMessageBox::StandardButton reply;
                 reply = QMessageBox::question(this, "Warning", "Routing will start and the Candle app will now open. Continue?",
                                             QMessageBox::Yes|QMessageBox::No);
-                if (reply == QMessageBox::Yes) {
+                if (reply == QMessageBox::Yes)
+                {
                     this->l->publishBoard();
                     accept();
                 }

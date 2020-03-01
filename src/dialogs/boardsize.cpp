@@ -9,7 +9,7 @@ BoardSize::BoardSize(QWidget *parent, Job * j) : QWidget(parent)
     description = new QLabel(tr("Please select a board size:"));
     sizeopt1 = new QRadioButton(tr("4 Inches x 6 Inches"));
     sizeopt2 = new QRadioButton(tr("9 Inches x 12 Inches"));
-    sizecust = new QRadioButton(tr("custom size:"));
+    sizecust = new QRadioButton(tr("Custom size:"));
 
     main_layout->addWidget(description);
     main_layout->addWidget(sizeopt1);

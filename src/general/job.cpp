@@ -1,17 +1,20 @@
 #include "job.h"
 
-Job::Job(){
+Job::Job()
+{
     board_amount = 1;
 };
 
 
-bool Job::isSame(Job j){
-    if(this->job_type == j.job_type)
+bool Job::isSame(Job j)
+{
+    if (this->job_type == j.job_type)
         return true;
     return false;
 }
 
-void Job::graphInit(){
+void Job::graphInit()
+{
    // assert(width !=0 && height != 0);
     border_width = width + d_x;
     border_height = height + d_y;
