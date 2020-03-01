@@ -7,29 +7,29 @@ BoardView1::BoardView1(Job* j, QWidget *parent) : QWidget(parent)
     top_scene = new QGraphicsScene;
     job = j;
 
-
     QPen pen(Qt::darkMagenta, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
-
     top_scene->setSceneRect(j->origin.x(), j->origin.y(),j->border_width, j->border_height);
-    //top_scene->addRect(this->job->border->toRect());
+    top_scene->addRect(this->job->border->toRect());
     top_scene->addRect(this->job->border->toRect(), pen, Qt::NoBrush);
     top_view->setScene(top_scene);
     top_view->fitInView(top_view->sceneRect(), Qt::KeepAspectRatio);
 
-    layers->addTab(top_view, tr("Top Copper"));
+    layers->addTab(top_view, tr("Top Copper "));
     layers->adjustSize();
-
 }
 
-void BoardView1::addBoard(Board1* board){
+void BoardView1::addBoard(Board1* board)
+{
     top_scene->addItem(board);
 }
 
-void BoardView1::removeBoard(Board1 *board){
+void BoardView1::removeBoard(Board1 *board)
+{
     top_scene->removeItem(board);
 }
 
-QImage BoardView1::publishLayout(){
+QImage BoardView1::publishLayout()
+{
     this->top_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->top_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
@@ -64,16 +64,18 @@ BoardView2::BoardView2(Job* j, QWidget * parent) : QWidget(parent){
     sol_top_view->setScene(sol_top_scene);
     sol_top_view->fitInView(sol_top_view->sceneRect(), Qt::KeepAspectRatio);
 
-    layers->addTab(top_view, tr("Top Copper"));
-    layers->addTab(sol_top_view, tr("Top Solder Mask"));
+    layers->addTab(top_view, tr("Top Copper "));
+    layers->addTab(sol_top_view, tr("Top Solder Mask "));
 }
 
-void BoardView2::addBoard(Board2* board){
+void BoardView2::addBoard(Board2* board)
+{
     top_scene->addItem(board);
     sol_top_scene->addItem(board->sol_top);
 }
 
-void BoardView2::removeBoard(Board2 *board){
+void BoardView2::removeBoard(Board2 *board)
+{
     top_scene->removeItem(board);
     sol_top_scene->removeItem(board->sol_top);
 }
@@ -90,7 +92,8 @@ QImage BoardView2::publishLayoutTop(){
     return image;
 }
 
-QImage BoardView2::publishLayoutSolTop(){
+QImage BoardView2::publishLayoutSolTop()
+{
     this->sol_top_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->sol_top_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
@@ -103,7 +106,8 @@ QImage BoardView2::publishLayoutSolTop(){
 }
 /**********************************************************/
 
-BoardView3::BoardView3(Job* j, QWidget * parent) : QWidget(parent){
+BoardView3::BoardView3(Job* j, QWidget * parent) : QWidget(parent)
+{
     job = j;
     layers = new QTabWidget(this);
 
@@ -128,21 +132,24 @@ BoardView3::BoardView3(Job* j, QWidget * parent) : QWidget(parent){
     bot_view->fitInView(bot_view->sceneRect(), Qt::KeepAspectRatio);
 
 
-    layers->addTab(top_view, tr("Top Copper"));
-    layers->addTab(bot_view, tr("Bottom Copper"));
+    layers->addTab(top_view, tr("Top Copper "));
+    layers->addTab(bot_view, tr("Bottom Copper "));
 }
 
-void BoardView3::addBoard(Board3* board){
+void BoardView3::addBoard(Board3* board)
+{
     top_scene->addItem(board);
     bot_scene->addItem(board->bot);
 }
 
-void BoardView3::removeBoard(Board3 *board){
+void BoardView3::removeBoard(Board3 *board)
+{
     top_scene->removeItem(board);
     bot_scene->removeItem(board->bot);
 }
 
-QImage BoardView3::publishLayoutTop(){
+QImage BoardView3::publishLayoutTop()
+{
     this->top_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->top_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
@@ -154,7 +161,8 @@ QImage BoardView3::publishLayoutTop(){
     return image;
 }
 
-QImage BoardView3::publishLayoutBot(){
+QImage BoardView3::publishLayoutBot()
+{
     this->bot_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->bot_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
@@ -217,10 +225,10 @@ BoardView4::BoardView4(Job * j, QWidget * parent) : QWidget(parent){
     bot_view->scale(-1,1);
     sol_bot_view->scale(-1,1);
 
-    layers->addTab(top_view, tr("Top Copper"));
-    layers->addTab(bot_view, tr("Bottom Copper"));
-    layers->addTab(sol_top_view, tr("Top Solder Mask"));
-    layers->addTab(sol_bot_view, tr("Bottom Solder Mask"));
+    layers->addTab(top_view, tr("Top Copper "));
+    layers->addTab(bot_view, tr("Bottom Copper "));
+    layers->addTab(sol_top_view, tr("Top Solder Mask "));
+    layers->addTab(sol_bot_view, tr("Bottom Solder Mask "));
 }
 
 void BoardView4::addBoard(Board4* board){
@@ -237,7 +245,8 @@ void BoardView4::removeBoard(Board4 *board){
     sol_bot_scene->removeItem(board->sol_bot);
 }
 
-QImage BoardView4::publishLayoutTop(){
+QImage BoardView4::publishLayoutTop()
+{
     this->top_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->top_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
@@ -248,7 +257,8 @@ QImage BoardView4::publishLayoutTop(){
     return image;
 }
 
-QImage BoardView4::publishLayoutBot(){
+QImage BoardView4::publishLayoutBot()
+{
     this->bot_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->bot_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
@@ -261,7 +271,8 @@ QImage BoardView4::publishLayoutBot(){
     return image;
 }
 
-QImage BoardView4::publishLayoutSolTop(){
+QImage BoardView4::publishLayoutSolTop()
+{
     this->sol_top_scene->setSceneRect(job->border->toRect());
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
     this->sol_top_scene->addRect(job->border->toRect(), pen, Qt::NoBrush);
@@ -272,7 +283,8 @@ QImage BoardView4::publishLayoutSolTop(){
     return image;
 }
 
-QImage BoardView4::publishLayoutSolBot(){
+QImage BoardView4::publishLayoutSolBot()
+{
     this->sol_bot_scene->setSceneRect(job->border->toRect());
 
     QPen pen(Qt::white, 6, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);

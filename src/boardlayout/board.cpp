@@ -13,7 +13,8 @@ void Board1::setBoardTop(QPixmap p){
 
 /*******************************************************************************/
 
-void Board2::setBoardTop(QPixmap p){
+void Board2::setBoardTop(QPixmap p)
+{
     QPixmap pix = p;
     if(this->invert){
     QImage i = p.toImage();
@@ -23,7 +24,8 @@ void Board2::setBoardTop(QPixmap p){
     setPixmap(pix);
 }
 
-void Board2::setBoardSolTop(QPixmap p){
+void Board2::setBoardSolTop(QPixmap p)
+{
     QPixmap pix = p;
     if(!this->invert){
     QImage i = p.toImage();
@@ -34,7 +36,8 @@ void Board2::setBoardSolTop(QPixmap p){
 }
 
 QVariant Board2::itemChange(GraphicsItemChange change, const QVariant &value){
-    if (change == ItemPositionChange && scene()) {
+    if (change == ItemPositionChange && scene())
+    {
         QPointF newPos = value.toPointF();
         this->sol_top->setPos(newPos);
     }
@@ -45,7 +48,8 @@ QVariant Board2::itemChange(GraphicsItemChange change, const QVariant &value){
 
 /********************************************************************************/
 
-void Board3::setBoardTop(QPixmap p){
+void Board3::setBoardTop(QPixmap p)
+{
     QPixmap pix = p;
     if(this->invert){
     QImage i = p.toImage();
@@ -65,7 +69,8 @@ void Board3::setBoardBot(QPixmap p){
     bot->setPixmap(pix);
 }
 
-QVariant Board3::itemChange(GraphicsItemChange change, const QVariant &value){
+QVariant Board3::itemChange(GraphicsItemChange change, const QVariant &value)
+{
     if (change == ItemPositionChange && scene()) {
         QPointF newPos = value.toPointF();
         this->bot->setPos(newPos);
@@ -74,7 +79,8 @@ QVariant Board3::itemChange(GraphicsItemChange change, const QVariant &value){
 }
 
 /********************************************************************************/
-void Board4::setBoardTop(QPixmap p){
+void Board4::setBoardTop(QPixmap p)
+{
     QPixmap pix = p;
     if(this->invert){
     QImage i = p.toImage();
