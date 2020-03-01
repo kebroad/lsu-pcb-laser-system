@@ -16,7 +16,6 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 
     setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
     //this->adjustSize(); // Keep for Windows version possibly
-    //showMaximized();
     job = j;
     w = new QStackedWidget;
 
@@ -35,13 +34,11 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     previous = new QPushButton(tr("Previous"));
     next = new QPushButton(tr("Next"));
 
-        previous->hide();
-
+    previous->hide();
     button_layout->addWidget(previous);
 
     button_layout->addWidget(next);
     main_layout->addLayout(button_layout);
-
 
     connect(next, SIGNAL(clicked()), this, SLOT(go_next()));
     connect(previous, SIGNAL(clicked()), this, SLOT(go_previous()));

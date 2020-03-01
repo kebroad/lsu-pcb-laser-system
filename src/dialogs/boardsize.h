@@ -19,9 +19,6 @@ class BoardSize : public QWidget
 {
     Q_OBJECT
 public:
-
-
-
     explicit BoardSize(QWidget *parent = nullptr, Job * j = new Job);
     int dpi;
     int toDPI(double m);
@@ -57,7 +54,7 @@ public slots:
             job->width = 12;
             this->close();
         }
-        else if(this->sizecust->isChecked())
+        else if (this->sizecust->isChecked())
         {
             job->height =  this->height->text().toInt();
             job->width =  this->width->text().toInt();
