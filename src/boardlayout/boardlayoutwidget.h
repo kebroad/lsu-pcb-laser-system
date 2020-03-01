@@ -103,7 +103,8 @@ public slots:
         }
         job->board_amount--;
     }
-    void publishBoard(){
+    void publishBoard()
+    {
         switch(job->job_type){
             case TOP:
          {       job->top = new QImage(board_view1->publishLayout());

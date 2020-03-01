@@ -14,9 +14,8 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 
     setWindowFlags( flags );
 
-    std::cout << "About to change icon" << std::endl;
     setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
-    //this->adjustSize();
+    //this->adjustSize(); // Keep for Windows version possibly
     //showMaximized();
     job = j;
     w = new QStackedWidget;
@@ -24,28 +23,19 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     main_layout = new QVBoxLayout(this);
     button_layout = new QHBoxLayout;
 
-
     t = new BoardType;
     s = new BoardSize;
-
 
     w->setCurrentIndex(0);
     w->insertWidget(0, t);
     w->insertWidget(1, s);
-    //w->insertWidget(2,l);
 
     main_layout->addWidget(w);
-
 
     previous = new QPushButton(tr("Previous"));
     next = new QPushButton(tr("Next"));
 
-
         previous->hide();
-
-
-
-
 
     button_layout->addWidget(previous);
 

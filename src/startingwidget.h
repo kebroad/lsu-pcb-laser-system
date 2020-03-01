@@ -106,7 +106,8 @@ public slots:
                 QMessageBox::StandardButton reply;
                 reply = QMessageBox::question(this, "Warning", "Routing will start and the Candle app will now open. Continue?",
                                             QMessageBox::Yes|QMessageBox::No);
-                if (reply == QMessageBox::Yes) {
+                if (reply == QMessageBox::Yes)
+                {
                     this->l->publishBoard();
                     accept();
                 }

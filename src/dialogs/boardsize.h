@@ -45,15 +45,17 @@ signals:
 public slots:
     void accept()
     {
-        if(this->sizeopt1->isChecked())
+        if (this->sizeopt1->isChecked())
         {
             job->height = 4;
             job->width = 6;
+            this->close();
         }
-        else if(this->sizeopt2->isChecked())
+        else if (this->sizeopt2->isChecked())
         {
             job->height = 9;
             job->width = 12;
+            this->close();
         }
         else if(this->sizecust->isChecked())
         {

@@ -102,7 +102,6 @@ int main(int argc, char *argv[])
 
     a.setStyleSheet(a.styleSheet() + "QWidget {font-size: 8pt}");
 
-    int testing_cross;
     Job * j = new Job;
     StartingWidget sw(NULL, j);
     int isacc = sw.exec();
