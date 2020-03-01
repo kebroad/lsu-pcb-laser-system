@@ -17,7 +17,6 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     std::cout << "About to change icon" << std::endl;
     setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
     //this->adjustSize();
-    //showMaximized();
     job = j;
     w = new QStackedWidget;
 
@@ -30,7 +29,6 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     w->setCurrentIndex(0);
     w->insertWidget(0, t);
     w->insertWidget(1, s);
-    //w->insertWidget(2,l);
 
     main_layout->addWidget(w);
 

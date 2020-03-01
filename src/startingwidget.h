@@ -78,6 +78,7 @@ public slots:
                 }
                 break;
             case 1:
+                this->move(200,200);
                 if (this->s->sizeopt1->isChecked())
                 {
                     job->height =  this->s->toDPI(4);
