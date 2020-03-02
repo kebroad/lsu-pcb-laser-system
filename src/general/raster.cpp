@@ -138,7 +138,7 @@ int Raster::findYMAX(QImage * image)
 }
 
 
-QList<QString> Raster::rasterRoute(QImage *image, int jt)
+QList<QString> Raster::rasterRoute(QImage *image)
 {
     /*********************************************
     Info: The first and most primitive routing algorithm... literally goes from side to side scanning and turning on the laser for the areas that need it
@@ -174,7 +174,6 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
     }
     for(int i = ymin; i < ymax + 1; i++)
     {
-        int path_origin = 0;
         QRgb *line = (QRgb*) image->scanLine(i);
         if (i % 2 == 0)
         { //Odd line #'s, starting with 0, left to right
@@ -273,7 +272,7 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
 
 QMap<QPoint, bool> list;
 
-QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
+QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image)
 {
     /*********************************************
     Info: takes away all lasered pixels bordering non-lasered pixels, and returns those pixels in a list along with the refined image
@@ -655,9 +654,7 @@ QList<QString>  Raster::hybridRoute(QImage * image)
 
     QString temp;
     QTextStream  fstream(&temp);
-    QPair <QList<QPoint>, QImage*> pair = this->outboundEdges(image, 2);
-
-
+    QPair <QList<QPoint>, QImage*> pair = this->outboundEdges(image);
 
     QList <QPoint> laser_points = pair.first;
 

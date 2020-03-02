@@ -14,9 +14,8 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 
     setWindowFlags( flags );
 
-    std::cout << "About to change icon" << std::endl;
     setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
-    //this->adjustSize();
+    //this->adjustSize(); // Keep for Windows version possibly
     job = j;
     w = new QStackedWidget;
 

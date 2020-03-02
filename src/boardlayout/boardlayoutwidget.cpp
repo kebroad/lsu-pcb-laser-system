@@ -1,11 +1,7 @@
 #include "boardlayoutwidget.h"
 
-
 BoardLayoutWidget::BoardLayoutWidget(QWidget *parent, Job * j) : QDialog(parent)
 {
-
-    //showMaximized();
-    //setWindowState(Qt::WindowMaximized);
     job = j;
     button_scroll = new QScrollArea;
 
@@ -22,8 +18,6 @@ BoardLayoutWidget::BoardLayoutWidget(QWidget *parent, Job * j) : QDialog(parent)
 
     QObject::connect(remove_board, SIGNAL(clicked()), this, SLOT(board_remove()));
     QObject::connect(add_board, SIGNAL(clicked()), this, SLOT(board_add()));
-
-    //button_scroll->setWidget();
 
     switch (job->job_type)
     {
