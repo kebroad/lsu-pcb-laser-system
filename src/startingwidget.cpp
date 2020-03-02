@@ -5,6 +5,7 @@
 #include <QDesktopWidget>
 #include <QScreen>
 #include <iostream>
+
 StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 {
     Qt::WindowFlags flags = 0;
@@ -16,7 +17,6 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 
     std::cout << "About to change icon" << std::endl;
     setWindowIcon(QIcon(":/images/LSU_PCB_ICON.png"));
-    //this->adjustSize();
     job = j;
     w = new QStackedWidget;
 

@@ -72,9 +72,15 @@ public slots:
                     w->setCurrentIndex(1);
                     previous->show();
                 }
+                else if (this->t->drill->isChecked())
+                {
+                    job->job_type = DRILL;
+                    w->setCurrentIndex(1);
+                    previous->show();
+                }
                 else
                 {
-                    QMessageBox::warning(this, "Warning", "Please Select a board type before continuing!");
+                    QMessageBox::warning(this, "Warning", "Please Select a job type before continuing!");
                 }
                 break;
             case 1:

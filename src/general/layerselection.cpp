@@ -7,11 +7,15 @@ LayerSelection::LayerSelection(QWidget *parent, Job * j) : QWidget(parent)
     top_sol = new QPushButton("Top Soldermask Layer");
     bot = new QPushButton("Bottom Layer");
     bot_sol = new QPushButton("Bottom Soldermask Layer");
+    drill = new QPushButton("Drill Job");
 
     main_layout->addWidget(top);
 
     switch (j->job_type)
     {
+        case TOP:
+            main_layout->addWidget(top);
+        break;
         case TOP_SOL:
             main_layout->addWidget(top_sol);
         break;
@@ -22,6 +26,12 @@ LayerSelection::LayerSelection(QWidget *parent, Job * j) : QWidget(parent)
             main_layout->addWidget(top_sol);
             main_layout->addWidget(bot);
             main_layout->addWidget(bot_sol);
+        break;
+        case DRILL:
+            main_layout->addWidget(top_sol);
+            main_layout->addWidget(bot);
+            main_layout->addWidget(bot_sol);
+        break;
     }
 
 

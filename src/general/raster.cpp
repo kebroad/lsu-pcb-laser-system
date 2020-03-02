@@ -20,6 +20,11 @@ Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int sp
 
 }
 
+bool Raster::Drill(Job* j, std::ifstream* f)
+{
+    return true;
+}
+
 double Raster::step(int x)
 {
     /*********************************************

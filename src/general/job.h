@@ -5,7 +5,7 @@
 #include <QFile>
 #include <QGraphicsRectItem>
 
-enum JobType {TOP, TOP_SOL, TOP_BOT, TOP_BOT_SOL };
+enum JobType {TOP, TOP_SOL, TOP_BOT, TOP_BOT_SOL, DRILL };
 
 class Job
 {
@@ -35,16 +35,19 @@ public:
     QImage * bot;
     QImage * sol_top;
     QImage * sol_bot;
+    QImage* drill;
 
     QFile * top_gcode;
     QFile * bot_gcode;
     QFile * sol_top_gcode;
     QFile * sol_bot_gcode;
+    QFile* drill_gcode;
 
     QList<QString> top_gcode_data;
     QList<QString> bot_gcode_data;
     QList<QString> sol_top_gcode_data;
     QList<QString> sol_bot_gcode_data;
+    QList<QString> drill_gcode_data;
 
 };
 

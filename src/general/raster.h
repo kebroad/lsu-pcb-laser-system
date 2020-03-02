@@ -5,6 +5,7 @@
 #include <QImage>
 #include <QTextStream>
 #include <iostream>
+#include <fstream>
 #include "job.h"
 
 enum Direction
@@ -35,6 +36,8 @@ public:
     int speed = 750;
 
     Raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity, int speed);
+
+    bool Drill(Job* j, std::ifstream* f);
 
     QList<QString>  rasterRoute(QImage* image, int jt = 1);
 

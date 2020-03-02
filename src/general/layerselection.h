@@ -18,6 +18,8 @@ public:
     QPushButton * top_sol;
     QPushButton * bot;
     QPushButton * bot_sol;
+    QPushButton* drill;
+
 
 signals:
 
