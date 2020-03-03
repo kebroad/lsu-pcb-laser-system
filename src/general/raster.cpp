@@ -22,6 +22,13 @@ Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int sp
 
 bool Raster::Drill(Job* j, std::ifstream* f)
 {
+    QString temp;
+    QTextStream  fstream(&temp);
+
+    fstream << "G90" << endl; // Set absolute coordinates
+    fstream << "F" << this->speed << endl; // Set Speed
+    fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
+
     return true;
 }
 
@@ -143,7 +150,7 @@ int Raster::findYMAX(QImage * image)
 }
 
 
-QList<QString> Raster::rasterRoute(QImage *image, int jt)
+QList<QString> Raster::rasterRoute(QImage *image)
 {
     /*********************************************
     Info: The first and most primitive routing algorithm... literally goes from side to side scanning and turning on the laser for the areas that need it
@@ -179,7 +186,6 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
     }
     for(int i = ymin; i < ymax + 1; i++)
     {
-        int path_origin = 0;
         QRgb *line = (QRgb*) image->scanLine(i);
         if (i % 2 == 0)
         { //Odd line #'s, starting with 0, left to right
@@ -278,7 +284,7 @@ QList<QString> Raster::rasterRoute(QImage *image, int jt)
 
 QMap<QPoint, bool> list;
 
-QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image, int pixels)
+QPair <QList<QPoint>, QImage*> Raster::outboundEdges(QImage * image)
 {
     /*********************************************
     Info: takes away all lasered pixels bordering non-lasered pixels, and returns those pixels in a list along with the refined image

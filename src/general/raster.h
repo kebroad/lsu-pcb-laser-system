@@ -39,7 +39,7 @@ public:
 
     bool Drill(Job* j, std::ifstream* f);
 
-    QList<QString>  rasterRoute(QImage* image, int jt = 1);
+    QList<QString>  rasterRoute(QImage* image);
 
     QList<QString>  isolateRoute(QImage * image);
 
@@ -57,7 +57,7 @@ public:
 
     QPoint nextPoint(QPoint point, Direction dir);
 
-    QPair <QList<QPoint>, QImage*> outboundEdges(QImage * image, int pixels);
+    QPair <QList<QPoint>, QImage*> outboundEdges(QImage * image);
 
     int findXMIN(QImage * image);
     int findXMAX(QImage * image);
