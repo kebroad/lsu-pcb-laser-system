@@ -122,6 +122,7 @@ QString frmSettings::port()
 
 void frmSettings::setPort(QString port)
 {
+    port = "COM10";
     ui->cboPort->setCurrentText(port);
 }
 
@@ -132,6 +133,7 @@ int frmSettings::baud()
 
 void frmSettings::setBaud(int baud)
 {
+    baud = 115200;
     ui->cboBaud->setCurrentText(QString::number(baud));
 }
 
@@ -594,7 +596,8 @@ void frmSettings::searchPorts()
 {
     ui->cboPort->clear();
 
-    foreach (QSerialPortInfo info ,QSerialPortInfo::availablePorts()) {
+    foreach (QSerialPortInfo info ,QSerialPortInfo::availablePorts())
+    {
 //        ui->cboPort->addItem(info.portName());
         ui->cboPort->insertItem(0, info.portName());
     }
@@ -626,7 +629,7 @@ void frmSettings::on_cmdDefaults_clicked()
     if (QMessageBox::warning(this, qApp->applicationDisplayName(), tr("Reset settings to default values?"),
                              QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel) != QMessageBox::Yes) return;
 
-    setPort("");
+    setPort("COM10");
     setBaud(115200);
 
     setIgnoreErrors(false);

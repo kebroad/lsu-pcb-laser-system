@@ -46,5 +46,8 @@
         <file>images/Banner2.png</file>
         <file>images/LSU_PCB_ICON.ico</file>
         <file>images/89b2506fbd059483363fa84bfbcfde05.gif</file>
+        <file>images/drill_button.png</file>
+        <file>images/laser_button.png</file>
+        <file>images/lsu_banner.png</file>
     </qresource>
 </RCC>

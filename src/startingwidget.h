@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QPixmap>
 #include "general/job.h"
 #include <QStackedWidget>
 #include "dialogs/boardsize.h"
@@ -17,21 +18,41 @@ class StartingWidget : public QDialog
 public:
     QVBoxLayout* main_layout;
     QHBoxLayout* button_layout;
+    QHBoxLayout* banner_layout;
+
     explicit StartingWidget(QWidget *parent = nullptr, Job * j = new Job);
     Job* job;
     QStackedWidget* w;
+    QWidget* banner_w;
     BoardSize* s;
     BoardType* t;
     BoardLayoutWidget* l;
     int current_index;
 
+    QPushButton* banner;
+    QPushButton* drill;
+    QPushButton * laser;
     QPushButton * next;
     QPushButton * previous;
 
 signals:
 
 public slots:
-    void go_next()
+    void selected_laser_job()
+    {
+        w->setCurrentIndex(0);
+        laser->hide();
+        drill->hide();
+        previous->show();
+        next->show();
+        button_layout->addWidget(previous);
+        button_layout->addWidget(next);
+        w->insertWidget(0, t);
+        w->insertWidget(1, s);
+        connect(next, SIGNAL(clicked()), this, SLOT(laser_job()));
+        connect(previous, SIGNAL(clicked()), this, SLOT(go_previous()));
+    }
+    void laser_job()
     {
         switch (w->currentIndex())
         {
@@ -72,9 +93,16 @@ public slots:
                     w->setCurrentIndex(1);
                     previous->show();
                 }
+                else if (this->t->drill->isChecked())
+                {
+                    job->job_type = DRILL;
+                    w->setCurrentIndex(1);
+                    w->removeWidget(t);
+                    previous->show();
+                }
                 else
                 {
-                    QMessageBox::warning(this, "Warning", "Please Select a board type before continuing!");
+                    QMessageBox::warning(this, "Warning", "Please Select a job type before continuing!");
                 }
                 break;
             case 1:
@@ -125,9 +153,23 @@ public slots:
                 }
         }
     }
+    void drill_job()
+    {
+        switch (this->w->currentIndex())
+        {
+        case 0:
+            previous->hide();
+            w->setCurrentIndex(0);
+            break;
+        case 2:
+            w->setCurrentIndex(1);
+           // w->removeWidget(l);
+        }
+    }
+
     void go_previous()
     {
-        switch(this->w->currentIndex())
+        switch (this->w->currentIndex())
         {
         case 1:
             previous->hide();

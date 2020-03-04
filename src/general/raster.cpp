@@ -20,6 +20,18 @@ Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int sp
 
 }
 
+bool Raster::Drill(Job* j, std::ifstream* f)
+{
+    QString temp;
+    QTextStream  fstream(&temp);
+
+    fstream << "G90" << endl; // Set absolute coordinates
+    fstream << "F" << this->speed << endl; // Set Speed
+    fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
+
+    return true;
+}
+
 double Raster::step(int x)
 {
     /*********************************************

@@ -48,6 +48,8 @@ public:
     QCheckBox* top_sol;
     QCheckBox* top_bot;
     QCheckBox* top_bot_sol;
+    QCheckBox* drill;
+
 
 signals:
 
@@ -99,6 +101,15 @@ public slots:
             power->setText("135");
             speed->setText("750");
             invert->setChecked(true);
+        }
+    }
+    void set_drill()
+    {
+        if(true)
+        {
+            power->setText("650");
+            speed->setText("750");
+            invert->setChecked(false);
         }
     }
 };
