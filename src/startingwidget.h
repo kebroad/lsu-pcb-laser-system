@@ -171,15 +171,6 @@ public slots:
     {
         switch (this->w->currentIndex())
         {
-        case 0:
-            previous->hide();
-            next->hide();
-            w->removeWidget(t);
-            w->removeWidget(s);
-            laser->show();
-            drill->show();
-            //w->setCurrentIndex(0);
-            break;
         case 1:
             previous->hide();
             w->setCurrentIndex(0);
