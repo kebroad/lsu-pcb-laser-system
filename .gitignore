@@ -59,3 +59,7 @@ bin/*
 
 #Code Editor Settings
 ,vscode
+*.rc
+ui_frmabout.h
+ui_frmmain.h
+ui_frmsettings.h
