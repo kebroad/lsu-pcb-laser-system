@@ -40,9 +40,11 @@ public:
     Job* job;
 
 public slots:
-    void board_add(){
+    void board_add()
+    {
         job->board_amount++;
-        switch (job->job_type) {
+        switch (job->job_type)
+        {
         case TOP:
             board1.append(new BoardSelector1(job->board_amount, job));
             button_layout->addWidget(board1.last());
@@ -68,8 +70,10 @@ public slots:
             board_view4->addBoard(board4.last()->board);
         }
     }
-    void board_remove(){
-        switch(job->job_type){
+    void board_remove()
+    {
+        switch(job->job_type)
+        {
             case TOP:
                 board_view1->removeBoard(board1.last()->board);
                 button_layout->removeWidget(board1.last());
@@ -97,7 +101,8 @@ public slots:
         }
         job->board_amount--;
     }
-    void publishBoard(){
+    void publishBoard()
+    {
         switch(job->job_type)
         {
             case TOP:
@@ -125,6 +130,7 @@ public slots:
                 break;
             }
             case TOP_BOT_SOL:
+            {
                 job->top = new QImage(board_view4->publishLayoutTop());
                 QFile file1("top.png");
                 file1.open(QIODevice::WriteOnly);
@@ -143,6 +149,7 @@ public slots:
                 file4.open(QIODevice::WriteOnly);
                 job->sol_bot->save(&file4, "PNG");
                 break;
+            }
         }
     }
 

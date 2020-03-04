@@ -666,7 +666,7 @@ QList<QString>  Raster::hybridRoute(QImage * image)
 
     QString temp;
     QTextStream  fstream(&temp);
-    QPair <QList<QPoint>, QImage*> pair = this->outboundEdges(image, 2);
+    QPair <QList<QPoint>, QImage*> pair = this->outboundEdges(image);
 
 
 
