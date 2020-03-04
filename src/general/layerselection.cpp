@@ -33,9 +33,4 @@ LayerSelection::LayerSelection(QWidget *parent, Job * j) : QWidget(parent)
             main_layout->addWidget(bot_sol);
         break;
     }
-
-
-
-
-
 }

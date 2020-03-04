@@ -38,7 +38,7 @@ public:
     Raster(Job* j, double stp, LaserMode l_mode, int lsr_intensity, int speed);
 
     bool Drill(Job* j, std::ifstream* f);
-
+  
     QList<QString>  rasterRoute(QImage* image);
 
     QList<QString>  isolateRoute(QImage * image);

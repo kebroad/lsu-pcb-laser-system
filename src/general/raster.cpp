@@ -668,8 +668,6 @@ QList<QString>  Raster::hybridRoute(QImage * image)
     QTextStream  fstream(&temp);
     QPair <QList<QPoint>, QImage*> pair = this->outboundEdges(image);
 
-
-
     QList <QPoint> laser_points = pair.first;
 
     fstream << "G90" << endl; // Use Absolute coordinates
