@@ -29,7 +29,8 @@ public:
 signals:
 
 public slots:
-    void setBoardTop(){
+    void setBoardTop()
+    {
         QString fileName = QFileDialog::getOpenFileName(this, "Open the file");
         QFile file(fileName);
          QFileInfo fileInfo(file.fileName());

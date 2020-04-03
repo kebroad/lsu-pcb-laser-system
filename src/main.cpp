@@ -130,8 +130,7 @@ int main(int argc, char *argv[])
         j->sol_bot_gcode_data = r.hybridRoute(j->sol_bot);
         break;
     case DRILL:
-        // TODO: Write method for drill job to read in file and send g code to machine
-        //j->drill = r.hybridRoute(j->drill);
+        j->drill_gcode_data = r.drill(j->drill);
         break;
     }
     load->hide();
