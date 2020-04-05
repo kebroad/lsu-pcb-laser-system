@@ -21,7 +21,7 @@ class DrillSelector : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DrillSelector(QWidget *parent = nullptr);
+    explicit DrillSelector(QWidget *parent = nullptr, Job* j = new Job);
 
     bool board_added = 0;
 
@@ -46,11 +46,13 @@ public:
     QPushButton * remove_board;
     QPushButton * ok;
 
-    Job* j;
+    QFile * tempf = new QFile;
 
-    void init(Job* job)
+    Job* job;
+
+    QFile* getFile()
     {
-        j = job;
+        return tempf;
     }
 
 signals:
@@ -69,7 +71,11 @@ public slots:
         QFileInfo fileInfo(file.fileName());
         QString filename(fileInfo.fileName());
 
-        if (!file.open(QIODevice::ReadOnly))
+        if (!file.exists())
+        {
+            QMessageBox::warning(this, "Warning", "Please select a file");
+        }
+        else if (!file.open(QIODevice::ReadOnly))
         {
             QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
         }
@@ -77,10 +83,10 @@ public slots:
         {
             QMessageBox::warning(this, "Warning", "File must be a .xln file");
         }
-
-        printf("Made it after board add!");
-        j->drill = &file;
-
+        else
+        {
+            tempf = &file;
+        }
     }
     void board_remove()
     {

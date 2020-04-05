@@ -68,6 +68,7 @@ public slots:
         button_layout->addWidget(previous);
         button_layout->addWidget(next);
         w->insertWidget(11, d);
+        w->insertWidget(12, d);
         connect(next, SIGNAL(clicked()), this, SLOT(drill_job()));
         connect(previous, SIGNAL(clicked()), this, SLOT(go_previous()));
     }
@@ -170,7 +171,8 @@ public slots:
     {
         switch (w->currentIndex())
         {
-        case 11:
+        printf("Current Index in Drill: %d", w->currentIndex());
+        case 0:
             job->speed = 750;
             job->power = 135;
             job->invert = true;
@@ -178,20 +180,15 @@ public slots:
             job->dpi = 500;
             job->height =  4;
             job->width =  6;
-            this->job->graphInit();
-            this->d = new DrillSelector(NULL);
-            d->init(this->job);
+            this->d = new DrillSelector(NULL, this->job);
             w->insertWidget(12,d);
-            w->setCurrentIndex(12);
             previous->show();
-            break;
-        case 12:
+            w->setCurrentIndex(12);
             QMessageBox::StandardButton reply;
             reply = QMessageBox::question(this, "Warning", "Routing will start and the Candle app will now open. Continue?",
                                         QMessageBox::Yes|QMessageBox::No);
             if (reply == QMessageBox::Yes)
             {
-                this->l->publishBoard();
                 accept();
             }
         }
@@ -199,7 +196,7 @@ public slots:
 
     void go_previous()
     {
-        switch (this->w->currentIndex())
+        switch (w->currentIndex())
         {
         case 0:
             w->removeWidget(t);

@@ -28,9 +28,7 @@ LayerSelection::LayerSelection(QWidget *parent, Job * j) : QWidget(parent)
             main_layout->addWidget(bot_sol);
         break;
         case DRILL:
-            main_layout->addWidget(top_sol);
-            main_layout->addWidget(bot);
-            main_layout->addWidget(bot_sol);
+            main_layout->addWidget(drill);
         break;
     }
 }

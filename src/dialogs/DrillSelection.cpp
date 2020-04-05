@@ -1,7 +1,8 @@
 #include "DrillSelection.h"
 
-DrillSelector::DrillSelector(QWidget *parent) : QWidget(parent)
+DrillSelector::DrillSelector(QWidget *parent, Job *j) : QWidget(parent)
 {
+     j= job;
      main_layout = new QVBoxLayout(this);
      button_layout = new QVBoxLayout;
 
