@@ -45,6 +45,8 @@ public:
 
     QList<QString>  hybridRoute(QImage * image);
 
+    QList<QString> drill(QFile* f);
+
     QImage* refineImage(QImage * image, int pixels);
 
     QList<QPoint> createLaserPoints(QImage* image);

@@ -35,7 +35,7 @@ public:
     QImage * bot;
     QImage * sol_top;
     QImage * sol_bot;
-    QImage* drill;
+    QFile* drill;
 
     QFile * top_gcode;
     QFile * bot_gcode;

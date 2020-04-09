@@ -20,18 +20,6 @@ Raster::Raster(Job* j, double stp, LaserMode l_mode, int laser_intensity, int sp
 
 }
 
-bool Raster::Drill(Job* j, std::ifstream* f)
-{
-    QString temp;
-    QTextStream  fstream(&temp);
-
-    fstream << "G90" << endl; // Set absolute coordinates
-    fstream << "F" << this->speed << endl; // Set Speed
-    fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
-
-    return true;
-}
-
 double Raster::step(int x)
 {
     /*********************************************
@@ -731,6 +719,51 @@ QList<QString>  Raster::hybridRoute(QImage * image)
 
     *pair.second = pair.second->mirrored(false,true);
     data.append(rasterRoute(pair.second));
+
+    return data;
+}
+
+QList<QString>  Raster::drill(QFile * f)
+{
+    /*********************************************
+    Info: Method for drilling
+    Inputs:
+    f: xln file that is read in and processed
+    Outputs:
+    String List: list of individual lines of gcode
+    *********************************************/
+
+    QString temp;
+    QTextStream  fstream(&temp);
+
+    printf("I made it inside raster without an issue!\n");
+
+    fstream << "G90" << endl; // Use Absolute coordinates
+    fstream << "F" << this->speed << endl; // Set speed
+    fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
+    if(this->laser_mode == CONSTANT_LASER_POWER_MODE)
+    {
+        fstream << "M3 S0" << endl;
+    }
+    else if (this->laser_mode == DYNAMIC_LASER_POWER_MODE)
+    {
+        fstream << "M4 S0" << endl;
+    }
+
+
+
+    fstream << "M5" << endl;
+    fstream << "G0 X0 Y0 Z0 S0" << endl;
+    fstream.seek(0);
+
+    QList<QString> data;
+
+    while (!fstream.atEnd())
+    {
+        data.append(fstream.readLine());
+    }
+
+    fstream.reset();
 
     return data;
 }

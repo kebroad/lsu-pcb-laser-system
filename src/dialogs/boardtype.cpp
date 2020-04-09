@@ -17,14 +17,12 @@ BoardType::BoardType(QWidget *parent) : QWidget(parent)
      top_sol = new QCheckBox("Top Side with Soldermask");
      top_bot = new QCheckBox("Top and Bottom Side");
      top_bot_sol = new QCheckBox("Top and Bottom Side with Soldermask");
-     drill = new QCheckBox("Drill job");
 
      groupOfCheckboxes->addButton(mask);
      groupOfCheckboxes->addButton(top);
      groupOfCheckboxes->addButton(top_sol);
      groupOfCheckboxes->addButton(top_bot);
      groupOfCheckboxes->addButton(top_bot_sol);
-     groupOfCheckboxes->addButton(drill);
 
      speed_layout = new QHBoxLayout;
      power_layout = new QHBoxLayout;
@@ -61,7 +59,6 @@ BoardType::BoardType(QWidget *parent) : QWidget(parent)
      QObject::connect(top_sol, SIGNAL(toggled(bool)), this, SLOT(set_top_sol()));
      QObject::connect(top_bot, SIGNAL(toggled(bool)), this, SLOT(set_top_bot()));
      QObject::connect(top_bot_sol, SIGNAL(toggled(bool)), this, SLOT(set_top_bot_sol()));
-     QObject::connect(drill, SIGNAL(toggled(bool)), this, SLOT(set_drill()));
 
      main_layout->addWidget(description);
      main_layout->addWidget(mask);
@@ -69,7 +66,6 @@ BoardType::BoardType(QWidget *parent) : QWidget(parent)
      main_layout->addWidget(top_sol);
      main_layout->addWidget(top_bot);
      main_layout->addWidget(top_bot_sol);
-     main_layout->addWidget(drill);
 
      main_layout->addLayout(speed_layout);
      main_layout->addLayout(power_layout);

@@ -21,9 +21,6 @@ BoardSelector1::BoardSelector1(int number, Job * job, QWidget *parent) : QWidget
     top->setLayout(layout);
 }
 
-
-
-
 BoardSelector2::BoardSelector2(int number, Job* job, QWidget *parent) : QWidget(parent)
 {
     board = new Board2(job->origin, job->invert);

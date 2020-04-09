@@ -10,6 +10,7 @@
 #include <QStackedWidget>
 #include "dialogs/boardsize.h"
 #include "dialogs/boardtype.h"
+#include "dialogs/DrillSelection.h"
 #include "boardlayout/boardlayoutwidget.h"
 
 class StartingWidget : public QDialog
@@ -26,7 +27,9 @@ public:
     QWidget* banner_w;
     BoardSize* s;
     BoardType* t;
+    DrillSelector* d;
     BoardLayoutWidget* l;
+
     int current_index;
 
     QPushButton* banner;
@@ -43,6 +46,7 @@ public slots:
         w->setCurrentIndex(0);
         laser->hide();
         drill->hide();
+        banner->hide();
         previous->show();
         next->show();
         button_layout->addWidget(previous);
@@ -52,6 +56,23 @@ public slots:
         connect(next, SIGNAL(clicked()), this, SLOT(laser_job()));
         connect(previous, SIGNAL(clicked()), this, SLOT(go_previous()));
     }
+
+    void selected_drill_job()
+    {
+        w->setCurrentIndex(11);
+        laser->hide();
+        drill->hide();
+        banner->hide();
+        previous->show();
+        next->show();
+        button_layout->addWidget(previous);
+        button_layout->addWidget(next);
+        w->insertWidget(11, d);
+        w->insertWidget(12, d);
+        connect(next, SIGNAL(clicked()), this, SLOT(drill_job()));
+        connect(previous, SIGNAL(clicked()), this, SLOT(go_previous()));
+    }
+
     void laser_job()
     {
         switch (w->currentIndex())
@@ -91,13 +112,6 @@ public slots:
                 {
                     job->job_type = TOP;
                     w->setCurrentIndex(1);
-                    previous->show();
-                }
-                else if (this->t->drill->isChecked())
-                {
-                    job->job_type = DRILL;
-                    w->setCurrentIndex(1);
-                    w->removeWidget(t);
                     previous->show();
                 }
                 else
@@ -155,29 +169,59 @@ public slots:
     }
     void drill_job()
     {
-        switch (this->w->currentIndex())
+        switch (w->currentIndex())
         {
+        printf("Current Index in Drill: %d", w->currentIndex());
         case 0:
-            previous->hide();
-            w->setCurrentIndex(0);
-            break;
-        case 2:
-            w->setCurrentIndex(1);
-           // w->removeWidget(l);
+            job->speed = 750;
+            job->power = 135;
+            job->invert = true;
+            job->job_type = DRILL;
+            job->dpi = 500;
+            job->height =  4;
+            job->width =  6;
+            this->d = new DrillSelector(NULL, this->job);
+            w->insertWidget(12,d);
+            previous->show();
+            w->setCurrentIndex(12);
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Warning", "Routing will start and the Candle app will now open. Continue?",
+                                        QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes)
+            {
+                accept();
+            }
         }
     }
 
     void go_previous()
     {
-        switch (this->w->currentIndex())
+        switch (w->currentIndex())
         {
-        case 1:
+        case 0:
+            w->removeWidget(t);
+            w->removeWidget(s);
             previous->hide();
+            next->hide();
+            drill->show();
+            laser->show();
+            banner->show();
+            w->setCurrentIndex(-1);
+        case 1:
             w->setCurrentIndex(0);
             break;
         case 2:
             w->setCurrentIndex(1);
-           // w->removeWidget(l);
+        case 11:
+            w->removeWidget(d);
+            previous->hide();
+            next->hide();
+            drill->show();
+            laser->show();
+            banner->show();
+            w->setCurrentIndex(-1);
+        case 12:
+            w->setCurrentIndex(11);
         }
     }
 };

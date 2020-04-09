@@ -25,11 +25,10 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
 
     t = new BoardType;
     s = new BoardSize;
+    d = new DrillSelector;
 
     main_layout->addWidget(w);
     button_layout->setSpacing(50);
-
-    banner_layout->addWidget(banner_w);
 
     previous = new QPushButton(tr("Previous"));
     next = new QPushButton(tr("Next"));
@@ -46,7 +45,7 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     drill->setFixedSize(225,225);
     drill->setStyleSheet("background-image: url(:/images/drill_button.png)");
 
-    w->setCurrentIndex(0);
+    w->setCurrentIndex(-1);
 
     button_layout->addWidget(laser);
     button_layout->addWidget(drill);
@@ -57,5 +56,5 @@ StartingWidget::StartingWidget(QWidget *parent, Job * j) : QDialog(parent)
     main_layout->addLayout(button_layout);
 
     connect(laser, SIGNAL(clicked()), this, SLOT(selected_laser_job()));
-    connect(drill, SIGNAL(clicked()), this, SLOT(drill_job()));
+    connect(drill, SIGNAL(clicked()), this, SLOT(selected_drill_job()));
 }

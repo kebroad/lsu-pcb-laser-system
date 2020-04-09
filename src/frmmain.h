@@ -90,13 +90,20 @@ public:
     double toolZPosition();
     
 private slots:
-    void loadTop(){
+    void loadDrill()
+    {
+        loadFile(job->drill_gcode_data);
+    }
+    void loadTop()
+    {
         loadFile(job->top_gcode_data);
     }
-    void loadTopSol(){
+    void loadTopSol()
+    {
         loadFile(job->sol_top_gcode_data);
     }
-    void loadBot(){
+    void loadBot()
+    {
         loadFile(job->bot_gcode_data);
     }
     void loadBotSol(){

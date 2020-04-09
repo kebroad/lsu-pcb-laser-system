@@ -39,6 +39,7 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 TRANSLATIONS += translations/candle_ru.ts translations/candle_es.ts translations/candle_fr.ts translations/candle_pt.ts
 
 SOURCES += main.cpp\
+    dialogs/DrillSelection.cpp \
         frmmain.cpp \
     frmsettings.cpp \
     frmabout.cpp \
@@ -78,6 +79,7 @@ SOURCES += main.cpp\
     general/loadingwidget.cpp
 
 HEADERS  += frmmain.h \
+    dialogs/DrillSelection.h \
     frmsettings.h \
     frmabout.h \
     drawers/gcodedrawer.h \

@@ -190,6 +190,7 @@ frmMain::frmMain(QWidget *parent, Job * j) :
 
     LayerSelection* ls = new LayerSelection(NULL, job);
     ui->verticalLayout_2->addWidget(ls);
+    connect(ls->drill, SIGNAL(clicked()), this, SLOT(loadDrill()));
     connect(ls->top, SIGNAL(clicked()), this, SLOT(loadTop()));
     connect(ls->top_sol, SIGNAL(clicked()), this, SLOT(loadTopSol()));
     connect(ls->bot, SIGNAL(clicked()), this, SLOT(loadBot()));

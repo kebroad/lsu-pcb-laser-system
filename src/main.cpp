@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
     switch(j->job_type)
     {
     case TOP:
-        j->top_gcode_data = r.hybridRoute(j->top);
+        j->top_gcode_data = r.isolateRoute(j->top);
         break;
     case TOP_SOL:
        j->top_gcode_data = r.isolateRoute(j->top);
@@ -124,14 +124,13 @@ int main(int argc, char *argv[])
         j->bot_gcode_data = r.isolateRoute(j->bot);
         break;
     case TOP_BOT_SOL:
-        j->top_gcode_data = r.hybridRoute(j->top);
-        j->sol_top_gcode_data = r.hybridRoute(j->sol_top);
-        j->bot_gcode_data = r.hybridRoute(j->bot);
-        j->sol_bot_gcode_data = r.hybridRoute(j->sol_bot);
+        j->top_gcode_data = r.isolateRoute(j->top);
+        j->sol_top_gcode_data = r.isolateRoute(j->sol_top);
+        j->bot_gcode_data = r.isolateRoute(j->bot);
+        j->sol_bot_gcode_data = r.isolateRoute(j->sol_bot);
         break;
     case DRILL:
-        // TODO: Write method for drill job to read in file and send g code to machine
-        //j->drill = r.hybridRoute(j->drill);
+        j->drill_gcode_data = r.drill(j->drill);
         break;
     }
     load->hide();
