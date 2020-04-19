@@ -756,16 +756,78 @@ QList<QString>  Raster::drill(QFile* f)
     }
 
     QTextStream in(&file);
+    int cnt = 0;
+    bool parsing = false;
     while(!in.atEnd())
     {
         QString line = in.readLine();
-        std::cout << qPrintable(line) << std::endl;
-        if(qPrintable(line) == "G90")
+        std::cout << "Line at index: " << cnt << " " << qPrintable(line) << std::endl;
+
+        if (strcmp(qPrintable(line), "G90") == 0) // Marks the beginnning of the job
         {
+            parsing = true;
             std::cout << "Begin G code parsing..." << std::endl;
         }
+        else if(strcmp(qPrintable(line), "M30") == 0) // Wait until end of job
+        {
+            parsing = false;
+            std::cout << "...finished the g code parsing" << std::endl;
+        }
+        else if(parsing)
+        {
+            std::string curLine = qPrintable(line);
+            std::string textLine = "";
+            std::string numLine = "";
 
+            for(std::string::iterator it = curLine.begin(); it != curLine.end();)
+            {
 
+                std::string tempString(1, *it);
+                if(tempString == "T")
+                {
+                    //Need to implenent a way to message user to change the bit out
+                    break;
+                }
+                if(tempString == "M")
+                {
+                    //It's a M71 or something related to the power
+                    break;
+                }
+                if(tempString == "X")
+                {
+                    textLine += tempString;
+                }
+                else if(tempString == "Y")
+                {
+                    double temp = ::atof(numLine.c_str());
+                    temp /= 1000;
+                    std::ostringstream strs;
+                    strs << temp;
+                    numLine = strs.str();
+                    textLine += numLine + " " + tempString;
+                    numLine = "";
+                }
+                else
+                {
+                    numLine += *it;
+                }
+                ++it;
+
+                if(it == curLine.end())
+                {
+                    double temp = ::atof(numLine.c_str());
+                    temp /= 1000;
+                    std::ostringstream strs;
+                    strs << temp;
+                    numLine = strs.str();
+                    textLine += numLine + " Z1";
+                    numLine = "";
+                    std::cout << textLine << std::endl;
+                }
+            }
+            fstream << textLine.c_str() << endl;
+        }
+        cnt++;
     }
 
     fstream << "M5" << endl;

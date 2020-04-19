@@ -5,7 +5,9 @@
 #include <QImage>
 #include <QTextStream>
 #include <iostream>
+#include <string.h>
 #include <fstream>
+#include <sstream>
 #include "job.h"
 
 enum Direction
