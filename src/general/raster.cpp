@@ -723,7 +723,7 @@ QList<QString>  Raster::hybridRoute(QImage * image)
     return data;
 }
 
-QList<QString>  Raster::drill(QFile * f)
+QList<QString>  Raster::drill(QFile* f)
 {
     /*********************************************
     Info: Method for drilling
@@ -736,11 +736,10 @@ QList<QString>  Raster::drill(QFile * f)
     QString temp;
     QTextStream  fstream(&temp);
 
-    printf("I made it inside raster without an issue!\n");
-
     fstream << "G90" << endl; // Use Absolute coordinates
     fstream << "F" << this->speed << endl; // Set speed
     fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
+
     if(this->laser_mode == CONSTANT_LASER_POWER_MODE)
     {
         fstream << "M3 S0" << endl;
@@ -750,7 +749,24 @@ QList<QString>  Raster::drill(QFile * f)
         fstream << "M4 S0" << endl;
     }
 
+    QFile file(qPrintable(f->fileName()));
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        std::cerr << "Couldn't open file!\n";
+    }
 
+    QTextStream in(&file);
+    while(!in.atEnd())
+    {
+        QString line = in.readLine();
+        std::cout << qPrintable(line) << std::endl;
+        if(qPrintable(line) == "G90")
+        {
+            std::cout << "Begin G code parsing..." << std::endl;
+        }
+
+
+    }
 
     fstream << "M5" << endl;
     fstream << "G0 X0 Y0 Z0 S0" << endl;

@@ -15,6 +15,7 @@
 #include <QLineEdit>
 #include "general/job.h"
 #include "boardlayout/boardselector.h"
+#include <iostream>
 #include <fstream>
 
 class DrillSelector : public QWidget
@@ -46,14 +47,9 @@ public:
     QPushButton * remove_board;
     QPushButton * ok;
 
-    QFile * tempf = new QFile;
+    QFile* tempf = new QFile;
 
     Job* job;
-
-    QFile* getFile()
-    {
-        return tempf;
-    }
 
 signals:
 
@@ -67,17 +63,18 @@ public slots:
     void board_add()
     {
         QString fileName = QFileDialog::getOpenFileName(this, "Open the file");
-        QFile file(fileName);
-        QFileInfo fileInfo(file.fileName());
+        QFile* file = new QFile;
+        file->setFileName(fileName);
+        QFileInfo fileInfo(file->fileName());
         QString filename(fileInfo.fileName());
 
-        if (!file.exists())
+        if (!file->exists())
         {
             QMessageBox::warning(this, "Warning", "Please select a file");
         }
-        else if (!file.open(QIODevice::ReadOnly))
+        else if (!file->open(QIODevice::ReadOnly))
         {
-            QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
+            QMessageBox::warning(this, "Warning", "Cannot open file: " + file->errorString());
         }
         else if(fileInfo.suffix() != "xln")
         {
@@ -85,7 +82,7 @@ public slots:
         }
         else
         {
-            tempf = &file;
+            tempf = file;
         }
     }
     void board_remove()

@@ -38,6 +38,8 @@ public:
     QPushButton * next;
     QPushButton * previous;
 
+    std::string fileName;
+
 signals:
 
 public slots:
@@ -180,7 +182,9 @@ public slots:
             job->dpi = 500;
             job->height =  4;
             job->width =  6;
+            this->job->drill = this->d->tempf;
             this->d = new DrillSelector(NULL, this->job);
+            fileName = qPrintable(this->d->tempf->fileName());
             w->insertWidget(12,d);
             previous->show();
             w->setCurrentIndex(12);
