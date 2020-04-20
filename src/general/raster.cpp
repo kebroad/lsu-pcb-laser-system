@@ -761,7 +761,6 @@ QList<QString>  Raster::drill(QFile* f)
     while(!in.atEnd())
     {
         QString line = in.readLine();
-        std::cout << "Line at index: " << cnt << " " << qPrintable(line) << std::endl;
 
         if (strcmp(qPrintable(line), "G90") == 0) // Marks the beginnning of the job
         {
@@ -820,12 +819,15 @@ QList<QString>  Raster::drill(QFile* f)
                     std::ostringstream strs;
                     strs << temp;
                     numLine = strs.str();
-                    textLine += numLine + " Z1";
+                    textLine += numLine;
                     numLine = "";
                     std::cout << textLine << std::endl;
+                    fstream << textLine.c_str() << endl;
+                    fstream << "Z50" << endl;
+                    fstream << "Z0" << endl;
                 }
             }
-            fstream << textLine.c_str() << endl;
+
         }
         cnt++;
     }
