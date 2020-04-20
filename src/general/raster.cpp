@@ -738,7 +738,7 @@ QList<QString>  Raster::drill(QFile* f)
 
     fstream << "G90" << endl; // Use Absolute coordinates
     fstream << "F" << this->speed << endl; // Set speed
-    fstream << "G0 X0 Y0 Z0" << endl; // Go to origin
+    fstream << "G0 X0 Y0 Z50" << endl; // Go to origin
 
     if(this->laser_mode == CONSTANT_LASER_POWER_MODE)
     {
@@ -823,17 +823,17 @@ QList<QString>  Raster::drill(QFile* f)
                     numLine = "";
                     std::cout << textLine << std::endl;
                     fstream << textLine.c_str() << endl;
-                    fstream << "Z50" << endl;
-                    fstream << "Z0" << endl;
+                    fstream << "Z0" << endl; // Drill up in CNC sim, but is probably not the case for GRBL
+                    fstream << "Z50" << endl; // Drill down in CNC sim, but is probably not the case for GRBL
                 }
             }
 
         }
         cnt++;
     }
-    fstream << "Z50" << endl;
+    fstream << "Z50" << endl; // Drill up in CNC sim, but is probably not the case for GRBL
     fstream << "M5" << endl;
-    fstream << "G0 X0 Y0 Z0 S0" << endl;
+    fstream << "G0 X0 Y0 Z50 S0" << endl;
     fstream.seek(0);
 
     QList<QString> data;
