@@ -831,7 +831,7 @@ QList<QString>  Raster::drill(QFile* f)
         }
         cnt++;
     }
-
+    fstream << "Z50" << endl;
     fstream << "M5" << endl;
     fstream << "G0 X0 Y0 Z0 S0" << endl;
     fstream.seek(0);
