@@ -5,3 +5,10 @@
 ### Building the Project
 
 Requires Qt Creator version 4.xx or above to build and is compatible on macOS, Linux, and Windows
+
+
+#### Sample Board from Machine
+![](wiki/images/sample_board.jpg)
+
+#### Picture of Machine
+![](wiki/images/machine.jpg)
